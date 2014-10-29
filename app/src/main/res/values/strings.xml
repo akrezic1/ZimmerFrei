@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ZimmerFrei</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+    <string-array name="navigation_drawer_items_array">
+        <item>Near me</item>
+        <item>My profile</item>
+        <item>My places</item>
+        <item>Language</item>
+        <item>Help</item>
+        <item>About</item>
+    </string-array>
+
+</resources>
