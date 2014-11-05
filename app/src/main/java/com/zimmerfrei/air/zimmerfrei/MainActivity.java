@@ -13,23 +13,29 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.activeandroid.ActiveAndroid;
 import com.zimmerfrei.air.nav.DrawerItemCustomAdapter;
 import com.zimmerfrei.air.nav.ObjectDrawerItem;
 
 
 public class MainActivity extends Activity {
 
-    private String[] mNavigationDrawerItemTitles;
-    private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
-    private ActionBarDrawerToggle mDrawerToggle;
-    private CharSequence mDrawerTitle;
-    private CharSequence mTitle;
-    public static FragmentManager fragmentManager;
+    /*
+    * Handling navigation drawer
+    */
+    private String[] mNavigationDrawerItemTitles;   // List of titles for navigation drawer
+    private DrawerLayout mDrawerLayout;             // Layout for navigation drawer
+    private ListView mDrawerList;                   // List view for navigation drawer
+    private ActionBarDrawerToggle mDrawerToggle;    // Used for listener to open/close drawer
+    private CharSequence mDrawerTitle;              // Title to display in ActionBar when drawer is open
+    private CharSequence mTitle;                    // Title to display in ActionBar when drawer is closed
+
+    public static FragmentManager fragmentManager;  // Instance of FragmentManager used to switch between fragments
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActiveAndroid.initialize(this);
         setContentView(R.layout.activity_main);
 
         mTitle = mDrawerTitle = getTitle();
@@ -38,11 +44,11 @@ public class MainActivity extends Activity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
-        // Popunjavanje liste za side navigation
+        // Filling the ListView with items
         ObjectDrawerItem[] drawerItem = new ObjectDrawerItem[6];
 
-        drawerItem[0] = new ObjectDrawerItem("Near me");
-        drawerItem[1] = new ObjectDrawerItem("My profile");
+        drawerItem[0] = new ObjectDrawerItem("Near me - map");
+        drawerItem[1] = new ObjectDrawerItem("My profile - list");
         drawerItem[2] = new ObjectDrawerItem("My places");
         drawerItem[3] = new ObjectDrawerItem("Language");
         drawerItem[4] = new ObjectDrawerItem("Help");
