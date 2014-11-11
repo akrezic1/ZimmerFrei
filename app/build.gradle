@@ -23,6 +23,9 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:support-v4:19.0.0'
     compile 'com.google.android.gms:play-services:6.1.71'
-    compile 'com.google.code.gson:gson:2.2.4'
     compile files('libs/activeandroid-3.0.jar')
+    compile 'com.squareup.okhttp:okhttp:2.0.0'
+    compile 'com.squareup.retrofit:retrofit:1.7.0'
+    compile 'com.google.code.gson:gson:2.3'
+    compile 'com.squareup.okhttp:okhttp-urlconnection:1.6.0'
 }

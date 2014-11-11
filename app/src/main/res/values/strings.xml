@@ -9,8 +9,8 @@
     <string name="apartment_pic">Apartment picture</string>
 
     <string-array name="navigation_drawer_items_array">
-        <item>Near me</item>
-        <item>My profile</item>
+        <item>Near me - map</item>
+        <item>Near me - list</item>
         <item>My places</item>
         <item>Language</item>
         <item>Help</item>

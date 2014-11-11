@@ -83,6 +83,8 @@ public class Apartment extends Model {
         this.updated_at = updated_at;
     }
 
+
+
     public String getName() {
         return name;
     }

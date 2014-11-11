@@ -14,6 +14,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.activeandroid.ActiveAndroid;
+import com.zimmerfrei.air.db.Apartment;
+import com.zimmerfrei.air.db.User;
 import com.zimmerfrei.air.nav.DrawerItemCustomAdapter;
 import com.zimmerfrei.air.nav.ObjectDrawerItem;
 
@@ -38,9 +40,9 @@ public class MainActivity extends Activity {
         ActiveAndroid.initialize(this);
         setContentView(R.layout.activity_main);
 
-        mTitle = mDrawerTitle = getTitle();
+        mTitle = mDrawerTitle = getTitle(); // Set ActionBar title to app title
 
-        mNavigationDrawerItemTitles = getResources().getStringArray(R.array.navigation_drawer_items_array);
+        mNavigationDrawerItemTitles = getResources().getStringArray(R.array.navigation_drawer_items_array); // Getting navigation titles from strings.xml
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
@@ -48,7 +50,7 @@ public class MainActivity extends Activity {
         ObjectDrawerItem[] drawerItem = new ObjectDrawerItem[6];
 
         drawerItem[0] = new ObjectDrawerItem("Near me - map");
-        drawerItem[1] = new ObjectDrawerItem("My profile - list");
+        drawerItem[1] = new ObjectDrawerItem("Near me - list");
         drawerItem[2] = new ObjectDrawerItem("My places");
         drawerItem[3] = new ObjectDrawerItem("Language");
         drawerItem[4] = new ObjectDrawerItem("Help");
@@ -118,6 +120,7 @@ public class MainActivity extends Activity {
         mDrawerToggle.syncState();
     }
 
+    // Open a new fragment with click on drawer item
     public class DrawerItemClickListener implements ListView.OnItemClickListener {
 
         @Override
@@ -133,7 +136,7 @@ public class MainActivity extends Activity {
                     fragment = new NearMeFragment();
                     break;
                 case 1:
-                    fragment = new MyProfileFragment();
+                    fragment = new NearMeListFragment();
                     break;
                 case 2:
                     fragment = new MyPlacesFragment();

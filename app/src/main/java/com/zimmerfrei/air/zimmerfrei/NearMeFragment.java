@@ -1,15 +1,12 @@
 package com.zimmerfrei.air.zimmerfrei;
 
-import android.content.Context;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -66,9 +63,32 @@ public class NearMeFragment extends Fragment {
     private static void setUpMap() {
         // For showing a move to my loction button
         mMap.setMyLocationEnabled(true);
-        // For dropping a marker at a point on the Map
-        //mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("My Home").snippet("Home Address"));
-        // For zooming automatically to the Dropped PIN Location
+        mMap.addMarker(new MarkerOptions().position(new LatLng(46.3051409,16.3345039)).title("Aoartman"));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(46.3063953,16.3372478)).title("Aoartman"));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(46.3059988,16.3379827)).title("Aoartman"));
 
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (mMap != null)
+            setUpMap();
+
+        if (mMap == null) {
+            mMap = ((MapFragment) MainActivity.fragmentManager
+                    .findFragmentById(R.id.map)).getMap();
+            if (mMap != null)
+                setUpMap();
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (mMap != null) {
+            MainActivity.fragmentManager.beginTransaction().remove(MainActivity.fragmentManager.findFragmentById(R.id.map)).commit();
+        }
+        mMap = null;
     }
 }
