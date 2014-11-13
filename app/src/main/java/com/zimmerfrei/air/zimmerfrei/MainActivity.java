@@ -154,12 +154,13 @@ public class MainActivity extends Activity {
             }
 
             if (fragment != null) {
+                mDrawerLayout.closeDrawer(mDrawerList);
                 fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
                 mDrawerList.setItemChecked(position, true);
                 mDrawerList.setSelection(position);
                 setTitle(mNavigationDrawerItemTitles[position]);
-                mDrawerLayout.closeDrawer(mDrawerList);
+
             } else {
                 Log.e("MainActivity", "Error in creating fragment");
             }

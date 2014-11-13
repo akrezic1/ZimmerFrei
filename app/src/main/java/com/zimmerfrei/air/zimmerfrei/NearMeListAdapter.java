@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.zimmerfrei.air.test.TestApartment;
@@ -49,9 +50,9 @@ public class NearMeListAdapter extends BaseAdapter {
             holder = new ViewHolder();
             convertView = this.inflater.inflate(R.layout.near_me_list_layout, parent, false);
 
-            holder.description = (TextView) convertView.findViewById(R.id.details);
             holder.distance = (TextView) convertView.findViewById(R.id.distance);
             holder.imgApartment = (ImageView) convertView.findViewById(R.id.apartment);
+            holder.rating = (RatingBar) convertView.findViewById(R.id.ratingNearMe);
 
             convertView.setTag(holder);
         } else {
@@ -59,17 +60,17 @@ public class NearMeListAdapter extends BaseAdapter {
         }
 
         TestApartment apartment = listApartment.get(position);
-        holder.description.setText(apartment.getDescription());
         holder.distance.setText(apartment.getDistance());
         holder.imgApartment.setImageResource(apartment.getDrawableId());
+        holder.rating.setRating(apartment.getRating());
 
         return convertView;
     }
 
     private class ViewHolder {
-        TextView description;
         TextView distance;
         ImageView imgApartment;
+        RatingBar rating;
     }
 
 }

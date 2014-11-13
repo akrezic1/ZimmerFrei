@@ -1,6 +1,7 @@
 package com.zimmerfrei.air.zimmerfrei;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,12 +33,12 @@ public class NearMeListFragment extends Fragment {
         arrayApartment = new ArrayList<TestApartment>();
 
 
-        TestApartment apartment = new TestApartment(R.drawable.apartment6, "Opis 1. apartmana", "6km");
-        TestApartment apartment2 = new TestApartment(R.drawable.apartment5, "Opis 2. apartmana", "10km");
-        TestApartment apartment3 = new TestApartment(R.drawable.apartment4, "Opis 3. apartmana", "17km");
-        TestApartment apartment4 = new TestApartment(R.drawable.apartment3, "Opis 4. apartmana", "18km");
-        TestApartment apartment5 = new TestApartment(R.drawable.apartment2, "Opis 5. apartmana", "19km");
-        TestApartment apartment6 = new TestApartment(R.drawable.apartment, "Opis 6. apartmana", "25km");
+        TestApartment apartment = new TestApartment(R.drawable.apartment6,  "6km", 5);
+        TestApartment apartment2 = new TestApartment(R.drawable.apartment5, "10km", 4.7f);
+        TestApartment apartment3 = new TestApartment(R.drawable.apartment4, "17km", 4.5f);
+        TestApartment apartment4 = new TestApartment(R.drawable.apartment3, "18km", 4f);
+        TestApartment apartment5 = new TestApartment(R.drawable.apartment2, "19km", 4.2f);
+        TestApartment apartment6 = new TestApartment(R.drawable.apartment, "25km", 4.1f);
 
         arrayApartment.add(apartment);
         arrayApartment.add(apartment2);
@@ -55,6 +56,13 @@ public class NearMeListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getActivity(), "Open apartment details", Toast.LENGTH_SHORT).show();
+                Fragment newFragment = new ApartmentDetailsFragment();
+                FragmentTransaction transaction = MainActivity.fragmentManager.beginTransaction();
+
+                transaction.replace(R.id.fragment_near_me_list, newFragment);
+                transaction.addToBackStack(null);
+
+                transaction.commit();
             }
         });
 

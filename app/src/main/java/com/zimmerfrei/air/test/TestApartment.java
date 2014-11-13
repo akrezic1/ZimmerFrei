@@ -6,14 +6,13 @@ package com.zimmerfrei.air.test;
 public class TestApartment {
 
     private int drawableId;
-    private String description;
     private String distance;
+    private float rating;
 
-    public TestApartment(int drawableId, String description, String distance) {
-        super();
+    public TestApartment(int drawableId, String distance, float rating) {
         this.drawableId = drawableId;
-        this.description = description;
         this.distance = distance;
+        this.rating = rating;
     }
 
     public int getDrawableId() {
@@ -24,19 +23,19 @@ public class TestApartment {
         this.drawableId = drawableId;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getDistance() {
         return distance;
     }
 
     public void setDistance(String distance) {
         this.distance = distance;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
     }
 }
