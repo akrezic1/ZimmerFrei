@@ -8,11 +8,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/fragment_near_me_list">
 
-
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/lvNearMe" />
+            android:id="@android:id/list" />
 
     </FrameLayout>
 </LinearLayout>
