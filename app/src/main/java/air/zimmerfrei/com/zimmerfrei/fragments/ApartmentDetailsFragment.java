@@ -40,10 +40,11 @@ public class ApartmentDetailsFragment extends Fragment {
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public static ApartmentDetailsFragment newInstance(int sectionNumber) {
+    public static ApartmentDetailsFragment newInstance(int sectionNumber, int apartment_id) {
         ApartmentDetailsFragment fragment = new ApartmentDetailsFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+        args.putInt("ID", apartment_id);
         fragment.setArguments(args);
         return fragment;
     }
@@ -68,7 +69,9 @@ public class ApartmentDetailsFragment extends Fragment {
 
         ApartmentDetailsAPI api = adapter.create(ApartmentDetailsAPI.class);
 
-        api.getApartmentDetails(2, new Callback<ApartmentDetailsResponse>() {
+        Bundle bundle = getArguments();
+
+        api.getApartmentDetails(bundle.getInt("ID"), new Callback<ApartmentDetailsResponse>() {
             @Override
             public void success(ApartmentDetailsResponse apartmentResponse, Response response) {
                 Log.d("RETROFIT: ", "SUCCESS!!!");

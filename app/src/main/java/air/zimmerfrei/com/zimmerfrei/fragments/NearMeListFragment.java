@@ -100,7 +100,7 @@ public class NearMeListFragment extends ListFragment {
 
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, ApartmentDetailsFragment.newInstance(1))
+                .replace(R.id.container, ApartmentDetailsFragment.newInstance(1, position))
                 .addToBackStack(null)
                 .commit();
     }
