@@ -1,20 +1,24 @@
 package air.zimmerfrei.com.zimmerfrei.fragments;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import air.zimmerfrei.com.zimmerfrei.MainActivity;
 import air.zimmerfrei.com.zimmerfrei.R;
 import air.zimmerfrei.com.zimmerfrei.adapters.NearMeListAdapter;
-import air.zimmerfrei.com.zimmerfrei.datamodel.Apartment;
+import air.zimmerfrei.com.zimmerfrei.datamodel.Apartment.Apartment;
+import air.zimmerfrei.com.zimmerfrei.datamodel.Apartment.ApartmentResponse;
 import air.zimmerfrei.com.zimmerfrei.webservice.ApartmentAPI;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -35,7 +39,7 @@ public class NearMeListFragment extends ListFragment {
     /**
      * ENDPOINT is base location of web services
      */
-    public static final String ENDPOINT = "http://arka.foi.hr";
+    public static final String ENDPOINT = "http://188.226.150.65";
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -49,7 +53,7 @@ public class NearMeListFragment extends ListFragment {
         return fragment;
     }
 
-    List<Apartment> listApartment;
+    List<ApartmentResponse> listApartment;
 
     public NearMeListFragment() {
 
@@ -63,6 +67,7 @@ public class NearMeListFragment extends ListFragment {
     }
 
     private void requestData() {
+        listApartment = new ArrayList<ApartmentResponse>();
 
         RestAdapter adapter = new RestAdapter.Builder()
                 .setEndpoint(ENDPOINT)
@@ -70,10 +75,10 @@ public class NearMeListFragment extends ListFragment {
 
         ApartmentAPI api = adapter.create(ApartmentAPI.class);
 
-        api.getApartments(new Callback<List<Apartment>>() {
+        api.getApartments(new Callback<Apartment>() {
             @Override
-            public void success(List<Apartment> apartments, Response response) {
-                listApartment = apartments;
+            public void success(Apartment apartments, Response response) {
+                listApartment = apartments.getResponse();
                 updateDisplay();
             }
 
@@ -88,6 +93,16 @@ public class NearMeListFragment extends ListFragment {
     protected void updateDisplay() {
         NearMeListAdapter adapter = new NearMeListAdapter(getActivity(), R.layout.list_near_me, listApartment);
         setListAdapter(adapter);
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, ApartmentDetailsFragment.newInstance(1))
+                .addToBackStack(null)
+                .commit();
     }
 
     @Override

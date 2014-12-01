@@ -15,7 +15,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import air.zimmerfrei.com.zimmerfrei.R;
-import air.zimmerfrei.com.zimmerfrei.datamodel.Apartment;
+import air.zimmerfrei.com.zimmerfrei.datamodel.Apartment.ApartmentResponse;
 
 
 /**
@@ -23,12 +23,12 @@ import air.zimmerfrei.com.zimmerfrei.datamodel.Apartment;
  * Adapter used for MyPlaces fragment
  */
 
-public class MyPlacesAdapter extends ArrayAdapter<Apartment> {
+public class MyPlacesAdapter extends ArrayAdapter<ApartmentResponse> {
 
     Context context;
-    private List<Apartment> listApartment;
+    private List<ApartmentResponse> listApartment;
 
-    public MyPlacesAdapter(Context context, int resource, List<Apartment> listApartment) {
+    public MyPlacesAdapter(Context context, int resource, List<ApartmentResponse> listApartment) {
         super(context, resource, listApartment);
         this.listApartment = listApartment;
         this.context = context;
@@ -40,7 +40,7 @@ public class MyPlacesAdapter extends ArrayAdapter<Apartment> {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.list_my_places, parent, false);
 
-        Apartment apartment = listApartment.get(position);
+        ApartmentResponse apartment = listApartment.get(position);
 
         ImageView image = (ImageView) view.findViewById(R.id.imageApartment);
         Picasso.with(context).load(apartment.getPicture()).into(image);

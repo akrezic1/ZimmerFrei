@@ -7,6 +7,7 @@
     android:id="@+id/apartment_details">
 
     <TextView
+        android:id="@+id/text_apartment_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Apartment name"
@@ -65,14 +66,16 @@
         android:layout_height="wrap_content"
         android:layout_weight="1">
         <RatingBar
+            android:id="@+id/rating_apartment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:numStars="5"
             android:rating="4.5"/>
 
         <TextView
+            android:id="@+id/text_apartment_details"
             android:layout_width="fill_parent"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:text="Apartment details"/>
         </LinearLayout>
 

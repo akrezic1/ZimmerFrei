@@ -8,12 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import air.zimmerfrei.com.zimmerfrei.R;
 import air.zimmerfrei.com.zimmerfrei.adapters.MyPlacesAdapter;
-import air.zimmerfrei.com.zimmerfrei.adapters.NearMeListAdapter;
-import air.zimmerfrei.com.zimmerfrei.datamodel.Apartment;
+import air.zimmerfrei.com.zimmerfrei.datamodel.Apartment.Apartment;
+import air.zimmerfrei.com.zimmerfrei.datamodel.Apartment.ApartmentResponse;
 import air.zimmerfrei.com.zimmerfrei.webservice.ApartmentAPI;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -35,7 +36,7 @@ public class MyPlacesFragment extends ListFragment {
     /**
      * ENDPOINT is base location of web services
      */
-    public static final String ENDPOINT = "http://arka.foi.hr";
+    public static final String ENDPOINT = "http://188.226.150.65";
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -49,7 +50,7 @@ public class MyPlacesFragment extends ListFragment {
         return fragment;
     }
 
-    List<Apartment> listApartment;
+    List<ApartmentResponse> listApartment;
 
     public MyPlacesFragment() {
 
@@ -63,16 +64,18 @@ public class MyPlacesFragment extends ListFragment {
     }
 
     private void requestData() {
+        listApartment = new ArrayList<ApartmentResponse>();
+
         RestAdapter adapter = new RestAdapter.Builder()
                 .setEndpoint(ENDPOINT)
                 .build();
 
         ApartmentAPI api = adapter.create(ApartmentAPI.class);
 
-        api.getApartments(new Callback<List<Apartment>>() {
+        api.getApartments(new Callback<Apartment>() {
             @Override
-            public void success(List<Apartment> apartments, Response response) {
-                listApartment = apartments;
+            public void success(Apartment apartments, Response response) {
+                listApartment = apartments.getResponse();
                 updateDisplay();
             }
 

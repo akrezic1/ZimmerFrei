@@ -1,8 +1,6 @@
 package air.zimmerfrei.com.zimmerfrei.webservice;
 
-import java.util.List;
-
-import air.zimmerfrei.com.zimmerfrei.datamodel.Apartment;
+import air.zimmerfrei.com.zimmerfrei.datamodel.Apartment.Apartment;
 import retrofit.Callback;
 import retrofit.http.GET;
 
@@ -11,7 +9,7 @@ import retrofit.http.GET;
  */
 public interface ApartmentAPI {
 
-    @GET("/~akrezic/apartments.json")
-    public void getApartments(Callback<List<Apartment>> response);
+    @GET("/zimmer-frei/public/api/v1/locations?lat=46.00&lng=16.00&range=1")
+    public void getApartments(Callback<Apartment> apartman);
 
 }

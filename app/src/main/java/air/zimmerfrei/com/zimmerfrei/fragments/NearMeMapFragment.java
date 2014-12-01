@@ -1,6 +1,5 @@
 package air.zimmerfrei.com.zimmerfrei.fragments;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.location.Location;
@@ -13,7 +12,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.maps.CameraUpdate;
@@ -23,11 +21,12 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import air.zimmerfrei.com.zimmerfrei.MainActivity;
 import air.zimmerfrei.com.zimmerfrei.R;
-import air.zimmerfrei.com.zimmerfrei.datamodel.Apartment;
+import air.zimmerfrei.com.zimmerfrei.datamodel.Apartment.Apartment;
+import air.zimmerfrei.com.zimmerfrei.datamodel.Apartment.ApartmentResponse;
 import air.zimmerfrei.com.zimmerfrei.webservice.ApartmentAPI;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -52,8 +51,8 @@ public class NearMeMapFragment extends Fragment {
     /**
      * ENDPOINT is base location of web services
      */
-    public static final String ENDPOINT = "http://arka.foi.hr";
-    List<Apartment> listApartment;
+    public static final String ENDPOINT = "http://188.226.150.65";
+    List<ApartmentResponse> listApartment;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -78,6 +77,7 @@ public class NearMeMapFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_near_me, container, false);
+        listApartment = new ArrayList<ApartmentResponse>();
         return rootView;
     }
 
@@ -133,16 +133,16 @@ public class NearMeMapFragment extends Fragment {
      * Requests the data from server to update map with markers (pins) using Retrofit
      */
     private void requestData() {
-        RestAdapter adapter = new RestAdapter.Builder()
+        final RestAdapter adapter = new RestAdapter.Builder()
                 .setEndpoint(ENDPOINT)
                 .build();
 
         ApartmentAPI api = adapter.create(ApartmentAPI.class);
 
-        api.getApartments(new Callback<List<Apartment>>() {
+        api.getApartments(new Callback<Apartment>() {
             @Override
-            public void success(List<Apartment> apartments, Response response) {
-                listApartment = apartments;
+            public void success(Apartment apartments, Response response) {
+                listApartment = apartments.getResponse();
                 updatePins();
             }
 
