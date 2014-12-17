@@ -21,7 +21,7 @@
         <meta-data android:name="AA_DB_VERSION" android:value="1" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCuaJ6ILmegdNzbGS1dkHZ0oBdoKZu1boo" />
+            android:value="AIzaSyBT6GSxZeCLRjs-k6mHXfHepYkbKNHBcCE" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

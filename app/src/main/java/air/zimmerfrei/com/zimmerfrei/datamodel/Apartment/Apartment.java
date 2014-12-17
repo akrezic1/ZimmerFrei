@@ -1,4 +1,4 @@
-package air.zimmerfrei.com.zimmerfrei.datamodel.Apartment;
+package air.zimmerfrei.com.zimmerfrei.datamodel.apartment;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -13,8 +13,8 @@ import java.util.List;
 
 import air.zimmerfrei.com.zimmerfrei.R;
 import air.zimmerfrei.com.zimmerfrei.adapters.MyPlacesAdapter;
-import air.zimmerfrei.com.zimmerfrei.datamodel.Apartment.Apartment;
-import air.zimmerfrei.com.zimmerfrei.datamodel.Apartment.ApartmentResponse;
+import air.zimmerfrei.com.zimmerfrei.datamodel.apartment.Apartment;
+import air.zimmerfrei.com.zimmerfrei.datamodel.apartment.ApartmentResponse;
 import air.zimmerfrei.com.zimmerfrei.webservice.ApartmentAPI;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -72,7 +72,7 @@ public class MyPlacesFragment extends ListFragment {
 
         ApartmentAPI api = adapter.create(ApartmentAPI.class);
 
-        api.getApartments(new Callback<Apartment>() {
+        api.getApartments("46.00", "16.00", "1.00", new Callback<Apartment>() {
             @Override
             public void success(Apartment apartments, Response response) {
                 listApartment = apartments.getResponse();

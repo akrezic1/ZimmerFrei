@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import air.zimmerfrei.com.zimmerfrei.MainActivity;
 import air.zimmerfrei.com.zimmerfrei.R;
 
 /**
@@ -29,7 +31,8 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_about, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        Toast.makeText(getActivity(), MainActivity.latitude + " " + MainActivity.longitude, Toast.LENGTH_SHORT);
         return rootView;
     }
 }

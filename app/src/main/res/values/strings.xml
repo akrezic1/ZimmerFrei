@@ -16,6 +16,10 @@
     <string name="title_section5">Help</string>
     <string name="title_section6">About</string>
 
+    <string name="location_error">GPS location not found</string>
+    <string name="look_here">Look here?</string>
+    <string name="are_you_sure_map">Are you sure you want to look here?</string>
+
     <string-array name="navigation_drawer_items_array">
         <item>Near me - map</item>
         <item>Near me - list</item>

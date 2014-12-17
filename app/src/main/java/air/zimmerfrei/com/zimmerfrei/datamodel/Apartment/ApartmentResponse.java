@@ -1,4 +1,4 @@
-package air.zimmerfrei.com.zimmerfrei.datamodel.Apartment;
+package air.zimmerfrei.com.zimmerfrei.datamodel.apartment;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

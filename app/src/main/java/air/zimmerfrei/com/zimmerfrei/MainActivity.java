@@ -1,27 +1,31 @@
 package air.zimmerfrei.com.zimmerfrei;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-
+import android.widget.Toast;
 
 import com.activeandroid.ActiveAndroid;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesClient;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationClient;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.model.LatLng;
 
 import air.zimmerfrei.com.zimmerfrei.fragments.AboutFragment;
 import air.zimmerfrei.com.zimmerfrei.fragments.HelpFragment;
 import air.zimmerfrei.com.zimmerfrei.fragments.HomeFragment;
 import air.zimmerfrei.com.zimmerfrei.fragments.MyPlacesFragment;
-import air.zimmerfrei.com.zimmerfrei.fragments.NearMeMapFragment;
 import air.zimmerfrei.com.zimmerfrei.fragments.NearMeListFragment;
+import air.zimmerfrei.com.zimmerfrei.fragments.NearMeMapFragment;
 
 
 public class MainActivity extends FragmentActivity
@@ -37,6 +41,9 @@ public class MainActivity extends FragmentActivity
      */
     private CharSequence mTitle;
     public static FragmentManager fManager;  // Instance of FragmentManager used to switch between fragments
+    private LocationClient client;
+    public static double latitude;
+    public static double longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,45 +62,69 @@ public class MainActivity extends FragmentActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        getCurrentLocation();
+    }
+
+    private void getCurrentLocation() {
+        client = new LocationClient(this, new GooglePlayServicesClient.ConnectionCallbacks() {
+
+            @Override
+            public void onConnected(Bundle bundle) {
+                Location currentLocation = client.getLastLocation();
+                if (currentLocation != null) {
+                    longitude = currentLocation.getLongitude();
+                    latitude = currentLocation.getLatitude();
+                    Toast.makeText(getApplication(), latitude + " " + longitude, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onDisconnected() {
+                Toast.makeText(getApplication(), "onDisc", Toast.LENGTH_LONG).show();
+            }
+        },  new GoogleApiClient.OnConnectionFailedListener() {
+
+            @Override
+            public void onConnectionFailed(ConnectionResult connectionResult) {
+                Toast.makeText(getApplication(), "fail!", Toast.LENGTH_LONG).show();
+            }
+        });
+        client.connect();
     }
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getFragmentManager();
+        Fragment fragment = new Fragment();
 
         if (position == 0) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container, HomeFragment.newInstance(position + 1)).commit();
+            fragment = HomeFragment.newInstance(position + 1);
         }
-        if (position == 1) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container, NearMeMapFragment.newInstance(position + 1)).commit();
+        else if (position == 1) {
+            fragment = NearMeMapFragment.newInstance(position + 1);
         }
         else if (position == 2) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container, NearMeListFragment.newInstance(position + 1)).commit();
+            fragment = NearMeListFragment.newInstance(position + 1);
         }
         else if (position == 3) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container, MyPlacesFragment.newInstance(position + 1)).commit();
+            fragment = MyPlacesFragment.newInstance(position + 1);
         }
         else if (position == 4) {
 
         }
         else if (position == 5) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container, HelpFragment.newInstance(position + 1)).commit();
+            fragment = HelpFragment.newInstance(position + 1);
         }
         else if (position == 6) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container, AboutFragment.newInstance(position + 1)).commit();
+            fragment = AboutFragment.newInstance(position + 1);
         }
-        else {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                    .commit();
-        }
+
+        fragmentManager.beginTransaction()
+                .setCustomAnimations(R.animator.enter_bottom, R.animator.exit_top, 0, 0)
+                .replace(R.id.container, fragment)
+                .commit();
     }
 
     public void onSectionAttached(int number) {
@@ -156,46 +187,6 @@ public class MainActivity extends FragmentActivity
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            return rootView;
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((MainActivity) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
-        }
     }
 
 }

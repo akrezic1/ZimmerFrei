@@ -17,8 +17,8 @@ import java.util.List;
 import air.zimmerfrei.com.zimmerfrei.MainActivity;
 import air.zimmerfrei.com.zimmerfrei.R;
 import air.zimmerfrei.com.zimmerfrei.adapters.NearMeListAdapter;
-import air.zimmerfrei.com.zimmerfrei.datamodel.Apartment.Apartment;
-import air.zimmerfrei.com.zimmerfrei.datamodel.Apartment.ApartmentResponse;
+import air.zimmerfrei.com.zimmerfrei.datamodel.apartment.Apartment;
+import air.zimmerfrei.com.zimmerfrei.datamodel.apartment.ApartmentResponse;
 import air.zimmerfrei.com.zimmerfrei.webservice.ApartmentAPI;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -62,32 +62,40 @@ public class NearMeListFragment extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_near_me_list, container, false);
-        requestData();
+
+        double lat = MainActivity.latitude;
+        double lng = MainActivity.longitude;
+        requestData(String.valueOf(lat), String.valueOf(lng), "1");
+
         return rootView;
     }
 
-    private void requestData() {
+    private void requestData(String lat, String lng, String range) {
         listApartment = new ArrayList<ApartmentResponse>();
 
         RestAdapter adapter = new RestAdapter.Builder()
                 .setEndpoint(ENDPOINT)
                 .build();
 
-        ApartmentAPI api = adapter.create(ApartmentAPI.class);
+        if (lat == null || lng == null) {
+            Toast.makeText(getActivity(), R.string.location_error, Toast.LENGTH_SHORT).show();
+        } else {
+            ApartmentAPI api = adapter.create(ApartmentAPI.class);
 
-        api.getApartments(new Callback<Apartment>() {
-            @Override
-            public void success(Apartment apartments, Response response) {
-                listApartment = apartments.getResponse();
-                updateDisplay();
-            }
+            api.getApartments(lat, lng, range, new Callback<Apartment>() {
+                @Override
+                public void success(Apartment apartments, Response response) {
+                    listApartment = apartments.getResponse();
+                    updateDisplay();
+                }
 
-            @Override
-            public void failure(RetrofitError error) {
-                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.d("Retrofit log: ", error.getMessage());
-            }
-        });
+                @Override
+                public void failure(RetrofitError error) {
+                    Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.d("Retrofit log: ", error.getMessage());
+                }
+            });
+        }
     }
 
     protected void updateDisplay() {

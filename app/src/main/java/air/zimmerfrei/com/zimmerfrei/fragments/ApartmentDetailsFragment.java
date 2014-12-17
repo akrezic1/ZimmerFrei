@@ -10,8 +10,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import air.zimmerfrei.com.zimmerfrei.R;
-import air.zimmerfrei.com.zimmerfrei.datamodel.ApartmentDetails.ApartmentDetailsResponse;
-import air.zimmerfrei.com.zimmerfrei.webservice.ApartmentDetailsAPI;
+import air.zimmerfrei.com.zimmerfrei.datamodel.apartmentdetails.ApartmentDetailsResponse;
+import air.zimmerfrei.com.zimmerfrei.webservice.ApartmentAPI;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -67,7 +67,7 @@ public class ApartmentDetailsFragment extends Fragment {
                 .setEndpoint(ENDPOINT)
                 .build();
 
-        ApartmentDetailsAPI api = adapter.create(ApartmentDetailsAPI.class);
+        ApartmentAPI api = adapter.create(ApartmentAPI.class);
 
         Bundle bundle = getArguments();
 

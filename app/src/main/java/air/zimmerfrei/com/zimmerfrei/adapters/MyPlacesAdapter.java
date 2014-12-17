@@ -15,7 +15,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import air.zimmerfrei.com.zimmerfrei.R;
-import air.zimmerfrei.com.zimmerfrei.datamodel.Apartment.ApartmentResponse;
+import air.zimmerfrei.com.zimmerfrei.datamodel.apartment.ApartmentResponse;
 
 
 /**
