@@ -30,9 +30,6 @@ public class HomeFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-        Toast.makeText(getActivity(), MainActivity.latitude + " " + MainActivity.longitude, Toast.LENGTH_SHORT);
-        return rootView;
+        return inflater.inflate(R.layout.fragment_home, container, false);
     }
 }

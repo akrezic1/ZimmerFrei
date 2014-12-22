@@ -23,7 +23,7 @@ import retrofit.client.Response;
 
 
 /**
- * Created by Andro on 29.10.2014..
+ * Created by Andro on 29.10.2014.
  */
 public class MyPlacesFragment extends ListFragment {
 
@@ -63,6 +63,9 @@ public class MyPlacesFragment extends ListFragment {
         return rootView;
     }
 
+    /**
+     * Request full details of selected apartment
+     */
     private void requestData() {
         listApartment = new ArrayList<ApartmentResponse>();
 
@@ -87,6 +90,9 @@ public class MyPlacesFragment extends ListFragment {
         });
     }
 
+    /**
+     * If data request was successful, update display with data from response
+     */
     protected void updateDisplay() {
         MyPlacesAdapter adapter = new MyPlacesAdapter(getActivity(), R.layout.list_my_places, listApartment);
         setListAdapter(adapter);

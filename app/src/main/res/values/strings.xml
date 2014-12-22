@@ -12,13 +12,23 @@
     <string name="title_section1">Near me (map)</string>
     <string name="title_section2">Near me (list)</string>
     <string name="title_section3">My places</string>
-    <string name="title_section4">Language</string>
+    <string name="title_section4">Profile</string>
     <string name="title_section5">Help</string>
     <string name="title_section6">About</string>
 
     <string name="location_error">GPS location not found</string>
     <string name="look_here">Look here?</string>
     <string name="are_you_sure_map">Are you sure you want to look here?</string>
+    <string name="could_not_connect">Can\'t connect to GPS</string>
+    <string name="user_profile_image">Users profile image</string>
+    <string name="user_type">Traveler</string>
+    <string name="logout">Log out</string>
+    <string name="login">Log in</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="no_user_pass">Enter username and password</string>
+    <string name="wrong_user_pass">Wrong username or password</string>
+    <string name="connection_fail">Connection failed</string>
 
     <string-array name="navigation_drawer_items_array">
         <item>Near me - map</item>

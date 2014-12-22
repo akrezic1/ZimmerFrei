@@ -26,7 +26,9 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- * Created by Andro on 10.11.2014..
+ * Created by Andro on 10.11.2014.
+ * Fragment shows list of apartments close to users location.
+ * Clicking on any apartment from list opens apartment details.
  */
 public class NearMeListFragment extends ListFragment {
 
@@ -70,6 +72,12 @@ public class NearMeListFragment extends ListFragment {
         return rootView;
     }
 
+    /**
+     * Requests the data from server to update map with markers (pins) using Retrofit
+     * @param lat latitude
+     * @param lng longitude
+     * @param range range of markers on map, around given location
+     */
     private void requestData(String lat, String lng, String range) {
         listApartment = new ArrayList<ApartmentResponse>();
 
@@ -98,6 +106,9 @@ public class NearMeListFragment extends ListFragment {
         }
     }
 
+    /**
+     * If data request was successful, update display with data from response
+     */
     protected void updateDisplay() {
         NearMeListAdapter adapter = new NearMeListAdapter(getActivity(), R.layout.list_near_me, listApartment);
         setListAdapter(adapter);

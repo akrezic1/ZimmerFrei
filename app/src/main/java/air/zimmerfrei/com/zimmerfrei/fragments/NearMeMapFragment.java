@@ -31,7 +31,9 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- * Created by Andro on 29.10.2014..
+ * Created by Andro on 29.10.2014.
+ * Fragment shows Google Map with markers around users location that represent apartments,
+ * it's also possible to long click on map and get new markers on that location
  */
 public class NearMeMapFragment extends Fragment {
 
@@ -73,7 +75,7 @@ public class NearMeMapFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_near_me, container, false);
-        listApartment = new ArrayList<ApartmentResponse>();
+        listApartment = new ArrayList<>();
         return rootView;
     }
 
