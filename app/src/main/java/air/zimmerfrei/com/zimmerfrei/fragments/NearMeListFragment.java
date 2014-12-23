@@ -116,11 +116,10 @@ public class NearMeListFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
+                .setCustomAnimations(R.animator.enter_right, R.animator.exit_left, 0, 0)
                 .replace(R.id.container, ApartmentDetailsFragment.newInstance(1, position))
-                .addToBackStack(null)
                 .commit();
     }
 

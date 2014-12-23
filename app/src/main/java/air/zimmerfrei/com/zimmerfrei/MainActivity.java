@@ -22,6 +22,7 @@ import air.zimmerfrei.com.zimmerfrei.fragments.AboutFragment;
 import air.zimmerfrei.com.zimmerfrei.fragments.HelpFragment;
 import air.zimmerfrei.com.zimmerfrei.fragments.HomeFragment;
 import air.zimmerfrei.com.zimmerfrei.fragments.LoginFragment;
+import air.zimmerfrei.com.zimmerfrei.fragments.LoginOrRegisterFragment;
 import air.zimmerfrei.com.zimmerfrei.fragments.MyPlacesFragment;
 import air.zimmerfrei.com.zimmerfrei.fragments.MyProfileFragment;
 import air.zimmerfrei.com.zimmerfrei.fragments.NearMeListFragment;
@@ -119,7 +120,7 @@ public class MainActivity extends FragmentActivity implements
                 fragment = MyProfileFragment.newInstance(position + 1);
             }
             else {
-                fragment = LoginFragment.newInstance(position + 1);
+                fragment = LoginOrRegisterFragment.newInstance(position + 1);
             }
         }
         else if (position == 5) {
@@ -164,6 +165,7 @@ public class MainActivity extends FragmentActivity implements
     public void restoreActionBar() {
         ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+        actionBar.setIcon(android.R.color.transparent);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
     }

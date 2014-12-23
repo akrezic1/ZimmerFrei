@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/image_background"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:src="@drawable/home"
+        android:scaleType="centerCrop"
+        />
+
+    <EditText
+        android:id="@+id/editName"
+        android:hint="@string/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        style="@style/RegistrationInput"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/editSurname"
+        android:hint="@string/surname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/RegistrationInput"
+        android:layout_below="@+id/editName"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/editUsername"
+        android:hint="@string/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/RegistrationInput"
+        android:layout_below="@+id/editSurname"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/editPassword"
+        android:hint="@string/password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        style="@style/RegistrationInput"
+        android:layout_below="@+id/editUsername"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/editEmail"
+        android:hint="@string/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        style="@style/RegistrationInput"
+        android:layout_below="@+id/editPassword"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/editPhone"
+        android:hint="@string/phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        style="@style/RegistrationInput"
+        android:layout_below="@+id/editEmail"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/button_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create_account"
+        android:layout_below="@+id/editPhone"
+        android:layout_alignStart="@+id/editPhone"
+        android:layout_alignEnd="@+id/editPhone" />
+
+
+</RelativeLayout>

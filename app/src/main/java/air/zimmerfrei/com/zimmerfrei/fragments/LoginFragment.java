@@ -126,8 +126,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     protected void openProfile() {
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, MyProfileFragment.newInstance(1))
                 .setCustomAnimations(R.animator.enter_bottom, R.animator.exit_top, 0, 0)
+                .replace(R.id.container, MyProfileFragment.newInstance(1))
                 .commit();
     }
 }
