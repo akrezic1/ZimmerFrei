@@ -6,8 +6,9 @@
         android:id="@+id/image_background"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:src="@drawable/home"
-        android:scaleType="centerCrop"/>
+        android:src="@drawable/home2"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/background_image" />
 
     <EditText
         android:id="@+id/username"

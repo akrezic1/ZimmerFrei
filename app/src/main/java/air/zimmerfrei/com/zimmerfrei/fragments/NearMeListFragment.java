@@ -1,6 +1,5 @@
 package air.zimmerfrei.com.zimmerfrei.fragments;
 
-import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.ListFragment;
 import android.os.Bundle;
@@ -79,7 +78,7 @@ public class NearMeListFragment extends ListFragment {
      * @param range range of markers on map, around given location
      */
     private void requestData(String lat, String lng, String range) {
-        listApartment = new ArrayList<ApartmentResponse>();
+        listApartment = new ArrayList<>();
 
         RestAdapter adapter = new RestAdapter.Builder()
                 .setEndpoint(ENDPOINT)
@@ -116,18 +115,11 @@ public class NearMeListFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
+        int apartmentId = Integer.parseInt(listApartment.get(position).getId());
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .setCustomAnimations(R.animator.enter_right, R.animator.exit_left, 0, 0)
-                .replace(R.id.container, ApartmentDetailsFragment.newInstance(1, position))
+                .replace(R.id.container, ApartmentDetailsFragment.newInstance(1, apartmentId))
                 .commit();
     }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        ((MainActivity) activity).onSectionAttached(
-                getArguments().getInt(ARG_SECTION_NUMBER));
-    }
-
 }

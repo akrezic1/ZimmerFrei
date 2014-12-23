@@ -1,6 +1,5 @@
 package air.zimmerfrei.com.zimmerfrei;
 
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
@@ -21,7 +20,6 @@ import com.google.android.gms.location.LocationServices;
 import air.zimmerfrei.com.zimmerfrei.fragments.AboutFragment;
 import air.zimmerfrei.com.zimmerfrei.fragments.HelpFragment;
 import air.zimmerfrei.com.zimmerfrei.fragments.HomeFragment;
-import air.zimmerfrei.com.zimmerfrei.fragments.LoginFragment;
 import air.zimmerfrei.com.zimmerfrei.fragments.LoginOrRegisterFragment;
 import air.zimmerfrei.com.zimmerfrei.fragments.MyPlacesFragment;
 import air.zimmerfrei.com.zimmerfrei.fragments.MyProfileFragment;
@@ -30,7 +28,7 @@ import air.zimmerfrei.com.zimmerfrei.fragments.NearMeMapFragment;
 
 
 public class MainActivity extends FragmentActivity implements
-        NavigationDrawerFragment.NavigationDrawerCallbacks,
+        NavigationDrawerCallbacks,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
@@ -41,10 +39,6 @@ public class MainActivity extends FragmentActivity implements
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
-    /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-     */
-    private CharSequence mTitle;
     public static FragmentManager fManager;
     private GoogleApiClient client;
     public static double latitude;
@@ -71,7 +65,6 @@ public class MainActivity extends FragmentActivity implements
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mTitle = getTitle();
 
         fManager = getFragmentManager();
 
@@ -97,6 +90,10 @@ public class MainActivity extends FragmentActivity implements
         client.connect();
     }
 
+    /**
+     * Switch between fragments on navigation drawer click
+     * @param position represents navigation drawer item position
+     */
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
@@ -136,41 +133,6 @@ public class MainActivity extends FragmentActivity implements
                 .commit();
     }
 
-    public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
-                mTitle = getString(R.string.title_home);
-                break;
-            case 2:
-                mTitle = getString(R.string.title_section1);
-                break;
-            case 3:
-                mTitle = getString(R.string.title_section2);
-                break;
-            case 4:
-                mTitle = getString(R.string.title_section3);
-                break;
-            case 5:
-                mTitle = getString(R.string.title_section4);
-                break;
-            case 6:
-                mTitle = getString(R.string.title_section5);
-                break;
-            case 7:
-                mTitle = getString(R.string.title_section6);
-                break;
-        }
-    }
-
-    public void restoreActionBar() {
-        ActionBar actionBar = getActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setIcon(android.R.color.transparent);
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle(mTitle);
-    }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
@@ -178,7 +140,6 @@ public class MainActivity extends FragmentActivity implements
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
             getMenuInflater().inflate(R.menu.main, menu);
-            restoreActionBar();
             return true;
         }
         return super.onCreateOptionsMenu(menu);

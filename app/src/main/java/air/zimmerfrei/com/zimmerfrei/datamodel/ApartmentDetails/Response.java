@@ -29,6 +29,8 @@ public class Response {
     @Expose
     private String rating;
     @Expose
+    private String price;
+    @Expose
     private String lat;
     @Expose
     private String lng;
@@ -37,12 +39,17 @@ public class Response {
     @Expose
     private String type;
     @Expose
+    private String cover;
+    @Expose
     private List<Picture> pictures = new ArrayList<Picture>();
     @Expose
     private List<Room> rooms = new ArrayList<Room>();
     @SerializedName("user_nickname")
     @Expose
     private String userNickname;
+    @SerializedName("user_avatar")
+    @Expose
+    private String userAvatar;
     @SerializedName("user_email")
     @Expose
     private String userEmail;
@@ -233,6 +240,24 @@ public class Response {
     /**
      *
      * @return
+     * The price
+     */
+    public String getPrice() {
+        return price;
+    }
+
+    /**
+     *
+     * @param price
+     * The price
+     */
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    /**
+     *
+     * @return
      * The lat
      */
     public String getLat() {
@@ -305,6 +330,24 @@ public class Response {
     /**
      *
      * @return
+     * The cover
+     */
+    public String getCover() {
+        return cover;
+    }
+
+    /**
+     *
+     * @param cover
+     * The cover
+     */
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
+
+    /**
+     *
+     * @return
      * The pictures
      */
     public List<Picture> getPictures() {
@@ -354,6 +397,24 @@ public class Response {
      */
     public void setUserNickname(String userNickname) {
         this.userNickname = userNickname;
+    }
+
+    /**
+     *
+     * @return
+     * The userAvatar
+     */
+    public String getUserAvatar() {
+        return userAvatar;
+    }
+
+    /**
+     *
+     * @param userAvatar
+     * The user_avatar
+     */
+    public void setUserAvatar(String userAvatar) {
+        this.userAvatar = userAvatar;
     }
 
     /**

@@ -135,7 +135,8 @@ public class NearMeMapFragment extends Fragment {
             mMap.addMarker(new MarkerOptions().position(new LatLng(
                     Double.parseDouble(listApartment.get(i).getLat()),
                     Double.parseDouble(listApartment.get(i).getLng())))
-                    .title(listApartment.get(i).getName()));
+                    .title(listApartment.get(i).getName())
+                    .snippet("Rating: " + listApartment.get(i).getRating()));
         }
     }
 

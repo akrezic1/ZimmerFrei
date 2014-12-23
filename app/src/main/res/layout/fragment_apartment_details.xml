@@ -10,55 +10,14 @@
         android:id="@+id/text_apartment_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Apartment name"
-        android:textSize="30dp"/>
+        android:textSize="30sp" />
 
-    <HorizontalScrollView
-        android:layout_width="wrap_content"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager_apartment_details"
+        android:layout_width="fill_parent"
         android:layout_height="300dp"
-        android:id="@+id/hsvDetails"
-        android:layout_weight="1">
+        android:layout_weight="1"/>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:id="@+id/myContainer"
-            android:orientation="horizontal"
-            >
-
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/apartment"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/apartment2"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/apartment3"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/apartment4"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/apartment5"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/apartment6"/>
-        </LinearLayout>
-
-    </HorizontalScrollView>
 
     <LinearLayout
         android:orientation="vertical"
@@ -69,14 +28,12 @@
             android:id="@+id/rating_apartment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:numStars="5"
-            android:rating="4.5"/>
+            android:numStars="5" />
 
         <TextView
             android:id="@+id/text_apartment_details"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Apartment details"/>
+            android:layout_height="wrap_content"/>
         </LinearLayout>
 
 

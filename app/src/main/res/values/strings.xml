@@ -35,17 +35,10 @@
     <string name="no_user_pass">Enter username and password</string>
     <string name="wrong_user_pass">Wrong username or password</string>
     <string name="connection_fail">Connection failed</string>
+
+    <string name="background_image">Background image</string>
     
     <string name="near_me">Near me</string>
     <string name="best_offers">Best offers</string>
-
-    <string-array name="navigation_drawer_items_array">
-        <item>Near me - map</item>
-        <item>Near me - list</item>
-        <item>My places</item>
-        <item>Language</item>
-        <item>Help</item>
-        <item>About</item>
-    </string-array>
 
 </resources>

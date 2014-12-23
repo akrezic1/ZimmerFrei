@@ -67,7 +67,7 @@ public class MyPlacesFragment extends ListFragment {
      * Request full details of selected apartment
      */
     private void requestData() {
-        listApartment = new ArrayList<ApartmentResponse>();
+        listApartment = new ArrayList<>();
 
         RestAdapter adapter = new RestAdapter.Builder()
                 .setEndpoint(ENDPOINT)

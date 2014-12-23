@@ -2,6 +2,7 @@ package air.zimmerfrei.com.zimmerfrei.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import air.zimmerfrei.com.zimmerfrei.R;
+import air.zimmerfrei.com.zimmerfrei.adapters.ApartmentDetailsPager;
 import air.zimmerfrei.com.zimmerfrei.datamodel.apartmentdetails.ApartmentDetailsResponse;
 import air.zimmerfrei.com.zimmerfrei.webservice.ApartmentAPI;
 import retrofit.Callback;
@@ -95,6 +97,18 @@ public class ApartmentDetailsFragment extends Fragment {
 
         TextView details = (TextView) getView().findViewById(R.id.text_apartment_details);
         details.setText(listResponse.getResponse().get(0).getDescription());
+
+        int size = listResponse.getResponse().get(0).getPictures().size();
+        String[] pictures = new String[size + 1];
+        if (size == 0) {
+            pictures[0] = listResponse.getResponse().get(0).getCover();
+        }
+        for (int i = 0; i < size; i++) {
+            pictures[i] = listResponse.getResponse().get(0).getPictures().get(i).getUrl();
+        }
+        ViewPager pager = (ViewPager) getView().findViewById(R.id.pager_apartment_details);
+        ApartmentDetailsPager adapter = new ApartmentDetailsPager(getActivity(), pictures);
+        pager.setAdapter(adapter);
     }
 
 }
