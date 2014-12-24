@@ -59,13 +59,15 @@ public class LoginOrRegisterFragment extends Fragment implements View.OnClickLis
         switch (v.getId()) {
             case R.id.btn_create_acc:
                 fragmentManager.beginTransaction()
-                        .setCustomAnimations(R.animator.enter_right, R.animator.exit_left, 0, 0)
+                        .setCustomAnimations(R.animator.enter_right, R.animator.exit_left, R.animator.enter_left, R.animator.exit_right)
+                        .addToBackStack(null)
                         .replace(R.id.container, RegistrationFragment.newInstance(1))
                         .commit();
                 break;
             case R.id.btn_login:
                 fragmentManager.beginTransaction()
-                        .setCustomAnimations(R.animator.enter_right, R.animator.exit_left, 0, 0)
+                        .setCustomAnimations(R.animator.enter_right, R.animator.exit_left, R.animator.enter_left, R.animator.exit_right)
+                        .addToBackStack(null)
                         .replace(R.id.container, LoginFragment.newInstance(1))
                         .commit();
                 break;

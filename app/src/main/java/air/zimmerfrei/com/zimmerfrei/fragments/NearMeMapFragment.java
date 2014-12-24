@@ -15,6 +15,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ import retrofit.client.Response;
  * Fragment shows Google Map with markers around users location that represent apartments,
  * it's also possible to long click on map and get new markers on that location
  */
-public class NearMeMapFragment extends Fragment {
+public class NearMeMapFragment extends Fragment implements GoogleMap.OnInfoWindowClickListener {
 
     private GoogleMap mMap;
     private MapFragment mFragment;
@@ -138,10 +139,11 @@ public class NearMeMapFragment extends Fragment {
                     .title(listApartment.get(i).getName())
                     .snippet("Rating: " + listApartment.get(i).getRating()));
         }
+        mMap.setOnInfoWindowClickListener(this);
     }
 
     /**
-     * Enable MyLocations so the map is centered on users current location
+     * Enable MyLocations and center the map on users current location
      * @param lat latitude
      * @param lng longitude
      */
@@ -194,5 +196,16 @@ public class NearMeMapFragment extends Fragment {
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
+    }
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        // TODO get apartment ID somehow..
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .setCustomAnimations(R.animator.enter_right, R.animator.exit_left, 0, R.animator.exit_right)
+                .addToBackStack(null)
+                .add(R.id.container, ApartmentDetailsFragment.newInstance(1, 2))
+                .commit();
     }
 }

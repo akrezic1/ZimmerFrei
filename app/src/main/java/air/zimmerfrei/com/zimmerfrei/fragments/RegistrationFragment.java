@@ -1,17 +1,17 @@
 package air.zimmerfrei.com.zimmerfrei.fragments;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import air.zimmerfrei.com.zimmerfrei.R;
+import air.zimmerfrei.com.zimmerfrei.SwypeFragment;
 
 /**
  * Created by Andro on 23.12.2014.
  */
-public class RegistrationFragment extends Fragment {
+public class RegistrationFragment extends SwypeFragment{
 
     /**
      * The fragment argument representing the section number for this
@@ -38,6 +38,7 @@ public class RegistrationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_registration, container, false);
+        rootView.setOnTouchListener(this);
         return rootView;
     }
 }

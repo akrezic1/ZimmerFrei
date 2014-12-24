@@ -1,6 +1,5 @@
 package air.zimmerfrei.com.zimmerfrei.fragments;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -11,6 +10,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import air.zimmerfrei.com.zimmerfrei.R;
+import air.zimmerfrei.com.zimmerfrei.SwypeFragment;
 import air.zimmerfrei.com.zimmerfrei.adapters.ApartmentDetailsPager;
 import air.zimmerfrei.com.zimmerfrei.datamodel.apartmentdetails.ApartmentDetailsResponse;
 import air.zimmerfrei.com.zimmerfrei.webservice.ApartmentAPI;
@@ -23,7 +23,7 @@ import retrofit.client.Response;
 /**
  * Created by Andro on 10.11.2014..
  */
-public class ApartmentDetailsFragment extends Fragment {
+public class ApartmentDetailsFragment extends SwypeFragment {
 
     ApartmentDetailsResponse listResponse;
 
@@ -60,6 +60,7 @@ public class ApartmentDetailsFragment extends Fragment {
         getActivity().setTitle("Apartment details");
 
         requestData();
+        rootView.setOnTouchListener(this);
 
         return rootView;
     }
@@ -76,7 +77,6 @@ public class ApartmentDetailsFragment extends Fragment {
         api.getApartmentDetails(bundle.getInt("ID"), new Callback<ApartmentDetailsResponse>() {
             @Override
             public void success(ApartmentDetailsResponse apartmentResponse, Response response) {
-                Log.d("RETROFIT: ", "SUCCESS!!!");
                 listResponse = apartmentResponse;
                 updateDisplay();
             }
@@ -102,13 +102,13 @@ public class ApartmentDetailsFragment extends Fragment {
         String[] pictures = new String[size + 1];
         if (size == 0) {
             pictures[0] = listResponse.getResponse().get(0).getCover();
-        }
-        for (int i = 0; i < size; i++) {
-            pictures[i] = listResponse.getResponse().get(0).getPictures().get(i).getUrl();
+        } else {
+            for (int i = 0; i < size; i++) {
+                pictures[i] = listResponse.getResponse().get(0).getPictures().get(i).getUrl();
+            }
         }
         ViewPager pager = (ViewPager) getView().findViewById(R.id.pager_apartment_details);
         ApartmentDetailsPager adapter = new ApartmentDetailsPager(getActivity(), pictures);
         pager.setAdapter(adapter);
     }
-
 }

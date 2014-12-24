@@ -1,6 +1,5 @@
 package air.zimmerfrei.com.zimmerfrei.fragments;
 
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -13,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import air.zimmerfrei.com.zimmerfrei.R;
+import air.zimmerfrei.com.zimmerfrei.SwypeFragment;
 import air.zimmerfrei.com.zimmerfrei.datamodel.profile.Profile;
 import air.zimmerfrei.com.zimmerfrei.webservice.LoginAPI;
 import retrofit.Callback;
@@ -22,7 +22,7 @@ import retrofit.RetrofitError;
 /**
  * Created by Andro on 22.12.2014.
  */
-public class LoginFragment extends Fragment implements View.OnClickListener {
+public class LoginFragment extends SwypeFragment implements View.OnClickListener {
 
     /**
      * The fragment argument representing the section number for this
@@ -56,6 +56,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         Button btnLogin = (Button) view.findViewById(R.id.login_button);
         btnLogin.setOnClickListener(this);
+        view.setOnTouchListener(this);
         return view;
     }
 

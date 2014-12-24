@@ -118,8 +118,9 @@ public class NearMeListFragment extends ListFragment {
         int apartmentId = Integer.parseInt(listApartment.get(position).getId());
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
-                .setCustomAnimations(R.animator.enter_right, R.animator.exit_left, 0, 0)
-                .replace(R.id.container, ApartmentDetailsFragment.newInstance(1, apartmentId))
+                .setCustomAnimations(R.animator.enter_right, R.animator.exit_left, 0, R.animator.exit_right)
+                .addToBackStack(null)
+                .add(R.id.container, ApartmentDetailsFragment.newInstance(1, apartmentId))
                 .commit();
     }
 }
