@@ -10,7 +10,8 @@
         android:id="@+id/text_apartment_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:text="Apartment" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager_apartment_details"
@@ -24,11 +25,30 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1">
-        <RatingBar
-            android:id="@+id/rating_apartment"
+
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:numStars="5" />
+            android:layout_height="wrap_content">
+
+            <RatingBar
+                android:id="@+id/rating_apartment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5" />
+
+            <ToggleButton
+                android:id="@+id/toggle_bookmark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:checked="false"
+                android:textOff="@string/save_to_favorites"
+                android:textOn="@string/remove_bookmark" />
+
+
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/text_apartment_details"

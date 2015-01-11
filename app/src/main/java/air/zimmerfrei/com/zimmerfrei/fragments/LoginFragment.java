@@ -140,6 +140,7 @@ public class LoginFragment extends SwypeFragment implements View.OnClickListener
         SharedPreferences sp = getActivity().getSharedPreferences("air.zimmerfrei.com.zimmerfrei", Context.MODE_PRIVATE);
 
         sp.edit().putString("token", profile.getRememberToken()).apply();
+        sp.edit().putString("username", profile.getResponse().getUsername()).apply();
         sp.edit().putString("name", profile.getResponse().getName()).apply();
         sp.edit().putString("surname", profile.getResponse().getSurname()).apply();
         sp.edit().putString("avatar", profile.getResponse().getAvatar()).apply();

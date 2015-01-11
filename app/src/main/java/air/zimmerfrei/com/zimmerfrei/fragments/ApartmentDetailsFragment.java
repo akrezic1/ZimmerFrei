@@ -1,19 +1,27 @@
 package air.zimmerfrei.com.zimmerfrei.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import air.zimmerfrei.com.zimmerfrei.R;
 import air.zimmerfrei.com.zimmerfrei.SwypeFragment;
 import air.zimmerfrei.com.zimmerfrei.adapters.ApartmentDetailsPager;
+import air.zimmerfrei.com.zimmerfrei.datamodel.ResponseStatus;
 import air.zimmerfrei.com.zimmerfrei.datamodel.apartmentdetails.ApartmentDetailsResponse;
 import air.zimmerfrei.com.zimmerfrei.webservice.ApartmentAPI;
+import air.zimmerfrei.com.zimmerfrei.webservice.ProfileAPI;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -57,8 +65,9 @@ public class ApartmentDetailsFragment extends SwypeFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_apartment_details, container, false);
-        getActivity().setTitle("Apartment details");
+        getActivity().setTitle(R.string.title_apartment_details);
 
+        setHasOptionsMenu(true);
         requestData();
         rootView.setOnTouchListener(this);
 
@@ -83,7 +92,7 @@ public class ApartmentDetailsFragment extends SwypeFragment {
 
             @Override
             public void failure(RetrofitError error) {
-                Log.d("RETROFIT: ", "FAIL!!!");
+                Log.d("RETROFIT: ", error.getMessage());
             }
         });
     }
@@ -110,5 +119,52 @@ public class ApartmentDetailsFragment extends SwypeFragment {
         ViewPager pager = (ViewPager) getView().findViewById(R.id.pager_apartment_details);
         ApartmentDetailsPager adapter = new ApartmentDetailsPager(getActivity(), pictures);
         pager.setAdapter(adapter);
+    }
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_apartment_details, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_bookmark) {
+            bookmarkApartment();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void bookmarkApartment() {
+        RestAdapter adapter = new RestAdapter.Builder()
+                .setEndpoint(ENDPOINT)
+                .build();
+
+        ProfileAPI api = adapter.create(ProfileAPI.class);
+        api.setUserFavorite(getAuthToken(), getUsername(), Integer.parseInt(listResponse.getResponse().get(0).getId()), new Callback<ResponseStatus>() {
+            @Override
+            public void success(ResponseStatus responseStatus, Response response) {
+                if (responseStatus.getStatus() == 200) {
+                    Toast.makeText(getActivity(), "Saved to MyPlaces", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(getActivity(), R.string.connection_fail, Toast.LENGTH_SHORT).show();
+                Log.d("BOOKMARK", error.getMessage());
+            }
+        });
+    }
+
+    private String getAuthToken() {
+        SharedPreferences prefs = getActivity().getSharedPreferences("air.zimmerfrei.com.zimmerfrei", Context.MODE_PRIVATE);
+        return prefs.getString("token", "error");
+    }
+
+    private String getUsername() {
+        SharedPreferences prefs = getActivity().getSharedPreferences("air.zimmerfrei.com.zimmerfrei", Context.MODE_PRIVATE);
+        return prefs.getString("username", "error");
     }
 }
