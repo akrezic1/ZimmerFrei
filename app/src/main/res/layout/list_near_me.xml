@@ -10,8 +10,7 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:layout_alignParentTop="true"
-        android:contentDescription="@string/apartment_pic"
-     />
+        android:contentDescription="@string/apartment_pic" />
 
     <TextView
         android:id="@+id/addressNearMe"
@@ -19,11 +18,13 @@
         android:focusableInTouchMode="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="10km"
+        android:textSize="20sp"
+        android:background="#aaf1c40f"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:textSize="20sp"
-        android:background="#f1c40f"
-        />
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp" />
 
 
     <RatingBar

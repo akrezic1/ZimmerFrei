@@ -78,5 +78,16 @@
         android:layout_alignStart="@+id/editPhone"
         android:layout_alignEnd="@+id/editPhone" />
 
+    <TextView
+        android:id="@+id/textTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/registration"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/frei_grey"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>

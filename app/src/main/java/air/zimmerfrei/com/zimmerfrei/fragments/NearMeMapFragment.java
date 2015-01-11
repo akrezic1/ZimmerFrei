@@ -19,6 +19,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import air.zimmerfrei.com.zimmerfrei.MainActivity;
@@ -40,6 +41,7 @@ public class NearMeMapFragment extends Fragment implements GoogleMap.OnInfoWindo
 
     private GoogleMap mMap;
     private MapFragment mFragment;
+    private HashMap<Marker, MarkerInfo> markerExtra;
 
     /**
      * The fragment argument representing the section number for this
@@ -77,6 +79,7 @@ public class NearMeMapFragment extends Fragment implements GoogleMap.OnInfoWindo
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_near_me, container, false);
         listApartment = new ArrayList<>();
+        markerExtra = new HashMap<>();
         return rootView;
     }
 
@@ -133,11 +136,14 @@ public class NearMeMapFragment extends Fragment implements GoogleMap.OnInfoWindo
      */
     private void updatePins() {
         for (int i = 0; i < listApartment.size(); i++) {
-            mMap.addMarker(new MarkerOptions().position(new LatLng(
+            Marker marker = mMap.addMarker(new MarkerOptions().position(new LatLng(
                     Double.parseDouble(listApartment.get(i).getLat()),
                     Double.parseDouble(listApartment.get(i).getLng())))
                     .title(listApartment.get(i).getName())
                     .snippet("Rating: " + listApartment.get(i).getRating()));
+
+            MarkerInfo markerInfo = new MarkerInfo(listApartment.get(i).getId(), listApartment.get(i).getName());
+            markerExtra.put(marker, markerInfo);
         }
         mMap.setOnInfoWindowClickListener(this);
     }
@@ -186,6 +192,7 @@ public class NearMeMapFragment extends Fragment implements GoogleMap.OnInfoWindo
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         mMap.clear();
+                        markerExtra.clear();
                         requestData(String.valueOf(latLng.latitude), String.valueOf(latLng.longitude), "1");
                     }
                 })
@@ -200,12 +207,32 @@ public class NearMeMapFragment extends Fragment implements GoogleMap.OnInfoWindo
 
     @Override
     public void onInfoWindowClick(Marker marker) {
+        MarkerInfo info = markerExtra.get(marker);
+        int apartmentId = Integer.parseInt(info.getId());
         // TODO get apartment ID somehow..
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .setCustomAnimations(R.animator.enter_right, R.animator.exit_left, 0, R.animator.exit_right)
                 .addToBackStack(null)
-                .add(R.id.container, ApartmentDetailsFragment.newInstance(1, 2))
+                .add(R.id.container, ApartmentDetailsFragment.newInstance(1, apartmentId))
                 .commit();
+    }
+}
+
+/**
+ * MarkerInfo class is used to add extra details to map markers, because it natively doesn't support
+ * it. HashMap is using Marker as a key, and MarkerInfo class for other values.
+ */
+class MarkerInfo {
+    String id;
+    String title;
+
+    MarkerInfo(String id, String title) {
+        this.id = id;
+        this.title = title;
+    }
+
+    public String getId() {
+        return id;
     }
 }

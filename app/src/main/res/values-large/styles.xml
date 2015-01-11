@@ -2,7 +2,8 @@
 <resources>
     <style name="RegistrationInput">
         <item name="android:ems">15</item>
-        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:layout_marginBottom">15dp</item>
         <item name="android:background">@color/frei_grey</item>
     </style>
 </resources>

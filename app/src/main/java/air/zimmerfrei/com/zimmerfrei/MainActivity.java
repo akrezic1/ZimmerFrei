@@ -32,7 +32,7 @@ public class MainActivity extends FragmentActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
-    private boolean DEVELOPER_MODE = true;
+    private boolean DEVELOPER_MODE = false;
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -46,6 +46,8 @@ public class MainActivity extends FragmentActivity implements
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //Used only for debugging
         if (DEVELOPER_MODE) {
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
                     .detectDiskReads()
@@ -129,6 +131,8 @@ public class MainActivity extends FragmentActivity implements
 
         fragmentManager.beginTransaction()
                 .setCustomAnimations(R.animator.enter_bottom, R.animator.exit_top, 0, 0)
+
+                .addToBackStack(null)
                 .replace(R.id.container, fragment)
                 .commit();
     }
