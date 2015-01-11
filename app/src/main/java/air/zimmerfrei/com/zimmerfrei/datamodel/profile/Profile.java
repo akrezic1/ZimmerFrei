@@ -1,6 +1,7 @@
 package air.zimmerfrei.com.zimmerfrei.datamodel.profile;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class Profile {
 
@@ -8,8 +9,9 @@ public class Profile {
     private Integer status;
     @Expose
     private Response response;
+    @SerializedName("remember_token")
     @Expose
-    private String token;
+    private String rememberToken;
 
     /**
      *
@@ -50,19 +52,19 @@ public class Profile {
     /**
      *
      * @return
-     * The token
+     * The rememberToken
      */
-    public String getToken() {
-        return token;
+    public String getRememberToken() {
+        return rememberToken;
     }
 
     /**
      *
-     * @param token
-     * The token
+     * @param rememberToken
+     * The remember_token
      */
-    public void setToken(String token) {
-        this.token = token;
+    public void setRememberToken(String rememberToken) {
+        this.rememberToken = rememberToken;
     }
 
 }
