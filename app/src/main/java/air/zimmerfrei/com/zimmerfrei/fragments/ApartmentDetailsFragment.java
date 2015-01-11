@@ -74,6 +74,9 @@ public class ApartmentDetailsFragment extends SwypeFragment {
         return rootView;
     }
 
+    /**
+     * Request data from server with all apartment details
+     */
     private void requestData() {
         RestAdapter adapter = new RestAdapter.Builder()
                 .setEndpoint(ENDPOINT)
@@ -110,7 +113,7 @@ public class ApartmentDetailsFragment extends SwypeFragment {
         int size = listResponse.getResponse().get(0).getPictures().size();
         String[] pictures = new String[size + 1];
         if (size == 0) {
-            pictures[0] = listResponse.getResponse().get(0).getCover();
+            pictures[0] = listResponse.getResponse().get(0).getCoverPhoto();
         } else {
             for (int i = 0; i < size; i++) {
                 pictures[i] = listResponse.getResponse().get(0).getPictures().get(i).getUrl();

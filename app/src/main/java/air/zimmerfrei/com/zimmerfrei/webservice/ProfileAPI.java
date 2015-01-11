@@ -1,6 +1,7 @@
 package air.zimmerfrei.com.zimmerfrei.webservice;
 
 import air.zimmerfrei.com.zimmerfrei.datamodel.ResponseStatus;
+import air.zimmerfrei.com.zimmerfrei.datamodel.apartment.Apartment;
 import retrofit.Callback;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
@@ -15,9 +16,17 @@ public interface ProfileAPI {
     @FormUrlEncoded
     @POST("/api/v1/setUserFavorites")
     public void setUserFavorite(
-        @Field("_token") String token,
-        @Field("username") String username,
-        @Field("apartment") int id,
-        Callback<ResponseStatus> response
+            @Field("_token") String token,
+            @Field("username") String username,
+            @Field("apartment") int id,
+            Callback<ResponseStatus> response
+    );
+
+    @FormUrlEncoded
+    @POST("/api/v1/getUserFavorites")
+    public void getUserFavorites(
+            @Field("_token") String token,
+            @Field("username") String username,
+            Callback<Apartment> apartment
     );
 }

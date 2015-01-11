@@ -33,7 +33,7 @@ public class ApartmentResponse {
     @Expose
     private String price;
     @Expose
-    private String picture;
+    private String cover_photo;
     @Expose
     private String city;
     @Expose
@@ -285,19 +285,19 @@ public class ApartmentResponse {
     /**
      *
      * @return
-     * The picture
+     * The cover_photo
      */
-    public String getPicture() {
-        return picture;
+    public String getCover_photo() {
+        return cover_photo;
     }
 
     /**
      *
-     * @param picture
-     * The picture
+     * @param cover_photo
+     * The cover_photo
      */
-    public void setPicture(String picture) {
-        this.picture = picture;
+    public void setCover_photo(String cover_photo) {
+        this.cover_photo = cover_photo;
     }
 
     /**

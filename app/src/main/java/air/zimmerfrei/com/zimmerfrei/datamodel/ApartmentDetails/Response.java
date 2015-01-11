@@ -38,8 +38,9 @@ public class Response {
     private String city;
     @Expose
     private String type;
+    @SerializedName("cover_photo")
     @Expose
-    private String cover;
+    private String coverPhoto;
     @Expose
     private List<Picture> pictures = new ArrayList<Picture>();
     @Expose
@@ -330,19 +331,19 @@ public class Response {
     /**
      *
      * @return
-     * The cover
+     * The coverPhoto
      */
-    public String getCover() {
-        return cover;
+    public String getCoverPhoto() {
+        return coverPhoto;
     }
 
     /**
      *
-     * @param cover
-     * The cover
+     * @param coverPhoto
+     * The cover_photo
      */
-    public void setCover(String cover) {
-        this.cover = cover;
+    public void setCoverPhoto(String coverPhoto) {
+        this.coverPhoto = coverPhoto;
     }
 
     /**
@@ -452,5 +453,6 @@ public class Response {
     public void setUserPhone(String userPhone) {
         this.userPhone = userPhone;
     }
+
 
 }

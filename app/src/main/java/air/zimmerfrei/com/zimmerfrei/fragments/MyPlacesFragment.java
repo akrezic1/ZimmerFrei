@@ -1,6 +1,9 @@
 package air.zimmerfrei.com.zimmerfrei.fragments;
 
+import android.app.FragmentManager;
 import android.app.ListFragment;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +19,7 @@ import air.zimmerfrei.com.zimmerfrei.adapters.MyPlacesAdapter;
 import air.zimmerfrei.com.zimmerfrei.datamodel.apartment.Apartment;
 import air.zimmerfrei.com.zimmerfrei.datamodel.apartment.ApartmentResponse;
 import air.zimmerfrei.com.zimmerfrei.webservice.ApartmentAPI;
+import air.zimmerfrei.com.zimmerfrei.webservice.ProfileAPI;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -59,7 +63,16 @@ public class MyPlacesFragment extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_my_places, container, false);
-        requestData();
+        if (!getAuthToken().equals("error")) {
+            requestData();
+        } else {
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()
+                    .setCustomAnimations(R.animator.enter_right, R.animator.exit_left, 0, R.animator.exit_right)
+                    .addToBackStack(null)
+                    .add(R.id.container, LoginFragment.newInstance(1))
+                    .commit();
+        }
         return rootView;
     }
 
@@ -73,9 +86,9 @@ public class MyPlacesFragment extends ListFragment {
                 .setEndpoint(ENDPOINT)
                 .build();
 
-        ApartmentAPI api = adapter.create(ApartmentAPI.class);
+        ProfileAPI api = adapter.create(ProfileAPI.class);
 
-        api.getApartments("46.00", "16.00", "1.00", new Callback<Apartment>() {
+        api.getUserFavorites(getAuthToken(), getUsername(), new Callback<Apartment>() {
             @Override
             public void success(Apartment apartments, Response response) {
                 listApartment = apartments.getResponse();
@@ -96,6 +109,16 @@ public class MyPlacesFragment extends ListFragment {
     protected void updateDisplay() {
         MyPlacesAdapter adapter = new MyPlacesAdapter(getActivity(), R.layout.list_my_places, listApartment);
         setListAdapter(adapter);
+    }
+
+    private String getAuthToken() {
+        SharedPreferences prefs = getActivity().getSharedPreferences("air.zimmerfrei.com.zimmerfrei", Context.MODE_PRIVATE);
+        return prefs.getString("token", "error");
+    }
+
+    private String getUsername() {
+        SharedPreferences prefs = getActivity().getSharedPreferences("air.zimmerfrei.com.zimmerfrei", Context.MODE_PRIVATE);
+        return prefs.getString("username", "error");
     }
 
 }

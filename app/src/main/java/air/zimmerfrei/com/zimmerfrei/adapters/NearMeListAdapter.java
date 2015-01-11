@@ -41,7 +41,7 @@ public class NearMeListAdapter extends ArrayAdapter<ApartmentResponse> {
         ApartmentResponse apartment = listApartment.get(position);
 
         ImageView image = (ImageView) view.findViewById(R.id.imageApartment);
-        Picasso.with(context).load(apartment.getPicture()).into(image);
+        Picasso.with(context).load(apartment.getCover_photo()).into(image);
 
         TextView address = (TextView) view.findViewById(R.id.addressNearMe);
         address.setText(apartment.getAddress());
