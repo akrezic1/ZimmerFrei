@@ -17,18 +17,15 @@ import java.util.List;
 import air.zimmerfrei.com.zimmerfrei.R;
 import air.zimmerfrei.com.zimmerfrei.datamodel.apartment.ApartmentResponse;
 
-
 /**
- * Created by Andro on 7.11.2014..
- * Adapter used for MyPlaces fragment
+ * Created by Andro on 13.1.2015.
  */
-
-public class MyPlacesAdapter extends ArrayAdapter<ApartmentResponse> {
+public class ApartmentListAdapter extends ArrayAdapter<ApartmentResponse> {
 
     Context context;
     private List<ApartmentResponse> listApartment;
 
-    public MyPlacesAdapter(Context context, int resource, List<ApartmentResponse> listApartment) {
+    public ApartmentListAdapter(Context context, int resource, List<ApartmentResponse> listApartment) {
         super(context, resource, listApartment);
         this.listApartment = listApartment;
         this.context = context;
@@ -55,3 +52,5 @@ public class MyPlacesAdapter extends ArrayAdapter<ApartmentResponse> {
     }
 
 }
+
+

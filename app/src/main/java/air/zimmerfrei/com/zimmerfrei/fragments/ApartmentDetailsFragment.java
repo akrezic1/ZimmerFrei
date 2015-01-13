@@ -161,6 +161,8 @@ public class ApartmentDetailsFragment extends SwypeFragment {
         });
     }
 
+    
+
     private String getAuthToken() {
         SharedPreferences prefs = getActivity().getSharedPreferences("air.zimmerfrei.com.zimmerfrei", Context.MODE_PRIVATE);
         return prefs.getString("token", "error");

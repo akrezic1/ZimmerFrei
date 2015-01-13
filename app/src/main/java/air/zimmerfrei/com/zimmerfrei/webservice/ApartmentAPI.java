@@ -16,14 +16,14 @@ public interface ApartmentAPI {
      * @param lat is latitude as in geographic coordinate
      * @param lng is longitude as in geographic coordinate
      * @param range sets the range on map where pins will spawn
-     * @param apartman is response from server
+     * @param apartment is response from server
      */
     @GET("/api/v1/locations")
     public void getApartments(
             @Query("lat") String lat,
             @Query("lng") String lng,
             @Query("range") String range,
-            Callback<Apartment> apartman);
+            Callback<Apartment> apartment);
 
     /**
      * Retrofit method that returns json with details for given apartment
@@ -34,5 +34,10 @@ public interface ApartmentAPI {
     public void getApartmentDetails(
             @Query("apartment_id") int id,
             Callback<ApartmentDetailsResponse> response);
+
+    @GET("/api/v1/apartmentSpecialOffers")
+    public void getBestOffers(
+            Callback<Apartment> apartment
+    );
 
 }

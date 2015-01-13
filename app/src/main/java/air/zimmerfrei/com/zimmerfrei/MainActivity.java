@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
@@ -84,39 +83,47 @@ public class MainActivity extends FragmentActivity implements
         FragmentManager fragmentManager = getFragmentManager();
         Fragment fragment = new Fragment();
 
-        if (position == 0) {
-            fragment = HomeFragment.newInstance(position + 1);
-        }
-        else if (position == 1) {
-            fragment = NearMeMapFragment.newInstance(position + 1);
-        }
-        else if (position == 2) {
-            fragment = NearMeListFragment.newInstance(position + 1);
-        }
-        else if (position == 3) {
-            fragment = MyPlacesFragment.newInstance(position + 1);
-        }
-        else if (position == 4) {
-            if (loadToken() == 1) {
-                fragment = MyProfileFragment.newInstance(position + 1);
-            }
-            else {
-                fragment = LoginOrRegisterFragment.newInstance(position + 1);
-            }
-        }
-        else if (position == 5) {
-            fragment = HelpFragment.newInstance(position + 1);
-        }
-        else if (position == 6) {
-            fragment = AboutFragment.newInstance(position + 1);
+        switch (position) {
+            case 0:
+                fragment = HomeFragment.newInstance(position + 1);
+                break;
+            case 1:
+                fragment = NearMeMapFragment.newInstance(position + 1);
+                break;
+            case 2:
+                fragment = NearMeListFragment.newInstance(position + 1);
+                break;
+            case 3:
+                fragment = MyPlacesFragment.newInstance(position + 1);
+                break;
+            case 4:
+                if (loadToken() == 1) {
+                    fragment = MyProfileFragment.newInstance(position + 1);
+                } else {
+                    fragment = LoginOrRegisterFragment.newInstance(position + 1);
+                }
+                break;
+            case 5:
+                fragment = HelpFragment.newInstance(position + 1);
+                break;
+            case 6:
+                fragment = AboutFragment.newInstance(position + 1);
+                break;
         }
 
-        fragmentManager.beginTransaction()
-                .setCustomAnimations(R.animator.enter_bottom, R.animator.exit_top, 0, 0)
+        if (position != 0) {
+            fragmentManager.beginTransaction()
+                    .setCustomAnimations(R.animator.enter_bottom, R.animator.exit_top, 0, R.animator.exit_bottom)
+                    .replace(R.id.container, fragment)
+                    .addToBackStack(null)
+                    .commit();
+        } else {
+            fragmentManager.beginTransaction()
+                    .setCustomAnimations(R.animator.enter_bottom, R.animator.exit_top, 0, R.animator.exit_bottom)
+                    .replace(R.id.container, fragment)
+                    .commit();
+        }
 
-                .addToBackStack(null)
-                .replace(R.id.container, fragment)
-                .commit();
     }
 
     @Override

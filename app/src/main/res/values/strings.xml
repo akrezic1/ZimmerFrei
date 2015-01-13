@@ -39,6 +39,7 @@
     <string name="no_user_pass">Enter username and password</string>
     <string name="wrong_user_pass">Wrong username or password</string>
     <string name="connection_fail">Connection failed</string>
+    <string name="login_or_register">Please login or register</string>
 
     <string name="background_image">Background image</string>
     

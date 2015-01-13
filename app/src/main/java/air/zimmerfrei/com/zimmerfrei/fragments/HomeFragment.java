@@ -56,7 +56,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 fragmentManager.beginTransaction()
                         .setCustomAnimations(R.animator.enter_bottom, R.animator.exit_top, 0, 0)
                         .addToBackStack(HomeFragment.class.getName())
-                        .replace(R.id.container, NearMeListFragment.newInstance(1))
+                        .replace(R.id.container, BestOffersFragment.newInstance(1))
                         .commit();
                 break;
         }
