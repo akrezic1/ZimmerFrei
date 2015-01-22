@@ -12,31 +12,12 @@
         android:contentDescription="@string/background_image" />
 
     <EditText
-        android:id="@+id/editName"
-        android:hint="@string/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        style="@style/RegistrationInput"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <EditText
-        android:id="@+id/editSurname"
-        android:hint="@string/surname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/RegistrationInput"
-        android:layout_below="@+id/editName"
-        android:layout_centerHorizontal="true" />
-
-    <EditText
         android:id="@+id/editUsername"
         android:hint="@string/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/RegistrationInput"
-        android:layout_below="@+id/editSurname"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
     <EditText
@@ -59,24 +40,14 @@
         android:layout_below="@+id/editPassword"
         android:layout_centerHorizontal="true" />
 
-    <EditText
-        android:id="@+id/editPhone"
-        android:hint="@string/phone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="phone"
-        style="@style/RegistrationInput"
-        android:layout_below="@+id/editEmail"
-        android:layout_centerHorizontal="true" />
-
     <Button
         android:id="@+id/button_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/create_account"
-        android:layout_below="@+id/editPhone"
-        android:layout_alignStart="@+id/editPhone"
-        android:layout_alignEnd="@+id/editPhone" />
+        android:layout_below="@+id/editEmail"
+        android:layout_alignEnd="@+id/editEmail"
+        android:layout_alignStart="@+id/editEmail" />
 
     <TextView
         android:id="@+id/textTitle"

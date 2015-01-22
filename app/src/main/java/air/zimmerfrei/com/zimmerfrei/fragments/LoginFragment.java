@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import air.zimmerfrei.com.zimmerfrei.R;
+import air.zimmerfrei.com.zimmerfrei.SharedPrefsHelper;
 import air.zimmerfrei.com.zimmerfrei.SwypeFragment;
 import air.zimmerfrei.com.zimmerfrei.datamodel.LaravelSessionToken;
 import air.zimmerfrei.com.zimmerfrei.datamodel.profile.Profile;
@@ -117,7 +118,7 @@ public class LoginFragment extends SwypeFragment implements View.OnClickListener
             @Override
             public void success(Profile profile, retrofit.client.Response response) {
                 if (profile.getStatus() == 200) {
-                    saveToSharedPref(profile);
+                    SharedPrefsHelper.saveToSharedPref(profile, getActivity());
                     openProfile();
                 } else {
                     Toast.makeText(getActivity(), R.string.wrong_user_pass, Toast.LENGTH_SHORT).show();
@@ -129,23 +130,6 @@ public class LoginFragment extends SwypeFragment implements View.OnClickListener
                 Toast.makeText(getActivity(), R.string.connection_fail, Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    /**
-     * Method is called if user is authenticated, this method saves users data to
-     * SharedPreferences for future use
-     * @param profile is response from server with users details
-     */
-    protected void saveToSharedPref(Profile profile) {
-        SharedPreferences sp = getActivity().getSharedPreferences("air.zimmerfrei.com.zimmerfrei", Context.MODE_PRIVATE);
-
-        sp.edit().putString("token", profile.getRememberToken()).apply();
-        sp.edit().putString("username", profile.getResponse().getUsername()).apply();
-        sp.edit().putString("name", profile.getResponse().getName()).apply();
-        sp.edit().putString("surname", profile.getResponse().getSurname()).apply();
-        sp.edit().putString("avatar", profile.getResponse().getAvatar()).apply();
-        sp.edit().putString("phone", profile.getResponse().getPhone()).apply();
-        sp.edit().putString("email", profile.getResponse().getEmail()).apply();
     }
 
     /**

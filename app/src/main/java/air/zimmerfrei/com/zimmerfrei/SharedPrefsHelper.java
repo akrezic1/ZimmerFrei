@@ -3,11 +3,30 @@ package air.zimmerfrei.com.zimmerfrei;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import air.zimmerfrei.com.zimmerfrei.datamodel.profile.Profile;
+
 /**
  * Created by Andro on 13.1.2015.
  * Helper class used to get values from Shared Preferences
  */
 public class SharedPrefsHelper {
+
+    /**
+     * Method is called if user is authenticated, this method saves users data to
+     * SharedPreferences for future use
+     * @param profile is response from server with users details
+     */
+    public static void saveToSharedPref(Profile profile, Context context) {
+        SharedPreferences sp = context.getSharedPreferences("air.zimmerfrei.com.zimmerfrei", Context.MODE_PRIVATE);
+
+        sp.edit().putString("token", profile.getRememberToken()).apply();
+        sp.edit().putString("username", profile.getResponse().getUsername()).apply();
+        sp.edit().putString("name", profile.getResponse().getName()).apply();
+        sp.edit().putString("surname", profile.getResponse().getSurname()).apply();
+        sp.edit().putString("avatar", profile.getResponse().getAvatar()).apply();
+        sp.edit().putString("phone", profile.getResponse().getPhone()).apply();
+        sp.edit().putString("email", profile.getResponse().getEmail()).apply();
+    }
 
     public static String getAuthToken(Context context) {
         SharedPreferences prefs = context.getSharedPreferences("air.zimmerfrei.com.zimmerfrei", Context.MODE_PRIVATE);

@@ -38,4 +38,15 @@ public interface LoginAPI {
         Callback<LaravelSessionToken> session_token
     );
 
+    @FormUrlEncoded
+    @POST("/api/v1/signup")
+    public void register(
+            @Field("_token") String token,
+            @Field("email") String email,
+            @Field("username") String username,
+            @Field("password") String password,
+            @Field("gcm_phone_id") String gcm,
+            Callback<Profile> callback
+    );
+
 }

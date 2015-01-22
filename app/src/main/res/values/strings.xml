@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="ENDPOINT">http://188.226.150.65</string>
+
     <string name="app_name">ZimmerFrei</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -40,6 +42,7 @@
     <string name="wrong_user_pass">Wrong username or password</string>
     <string name="connection_fail">Connection failed</string>
     <string name="login_or_register">Please login or register</string>
+    <string name="registration_problem">Registration error, please try again</string>
 
     <string name="background_image">Background image</string>
     
