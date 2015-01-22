@@ -31,7 +31,7 @@ public abstract class ApartmentListFragment extends ListFragment{
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        int apartmentId = Integer.parseInt(listApartment.get(position).getId());
+        int apartmentId = Integer.parseInt(listApartment.get(position).getIdMember());
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .setCustomAnimations(R.animator.enter_right, R.animator.exit_left, 0, R.animator.exit_right)

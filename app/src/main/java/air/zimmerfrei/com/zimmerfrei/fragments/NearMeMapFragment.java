@@ -142,7 +142,7 @@ public class NearMeMapFragment extends Fragment implements GoogleMap.OnInfoWindo
                     .title(listApartment.get(i).getName())
                     .snippet("Rating: " + listApartment.get(i).getRating()));
 
-            MarkerInfo markerInfo = new MarkerInfo(listApartment.get(i).getId(), listApartment.get(i).getName());
+            MarkerInfo markerInfo = new MarkerInfo(listApartment.get(i).getIdMember(), listApartment.get(i).getName());
             markerExtra.put(marker, markerInfo);
         }
         mMap.setOnInfoWindowClickListener(this);

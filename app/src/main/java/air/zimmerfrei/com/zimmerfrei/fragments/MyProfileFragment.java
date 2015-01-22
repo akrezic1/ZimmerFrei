@@ -7,27 +7,17 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.maps.model.LatLng;
 import com.squareup.picasso.Picasso;
-
-import java.util.List;
 
 import air.zimmerfrei.com.zimmerfrei.R;
 import air.zimmerfrei.com.zimmerfrei.adapters.CircleTransform;
-import air.zimmerfrei.com.zimmerfrei.datamodel.profile.Profile;
-import air.zimmerfrei.com.zimmerfrei.webservice.LoginAPI;
-import retrofit.Callback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
 
 /**
  * Created by Andro on 29.10.2014..

@@ -9,8 +9,6 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
-import air.zimmerfrei.com.zimmerfrei.R;
-
 /**
  * Created by Andro on 23.12.2014.
  */

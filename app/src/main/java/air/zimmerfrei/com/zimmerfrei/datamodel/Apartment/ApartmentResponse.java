@@ -1,49 +1,73 @@
 package air.zimmerfrei.com.zimmerfrei.datamodel.apartment;
 
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ApartmentResponse {
+@Table(name = "ApartmentResponses")
+public class ApartmentResponse extends Model {
 
+    @Column(name = "idMember")
+    @SerializedName(value = "id")
     @Expose
-    private String id;
+    private String idMember;
+    @Column(name = "Name")
     @Expose
     private String name;
+    @Column(name = "Description")
     @Expose
     private String description;
+    @Column(name = "Capacity")
     @Expose
     private String capacity;
+    @Column(name = "Stars")
     @Expose
     private String stars;
+    @Column(name = "Address")
     @Expose
     private String address;
+    @Column(name = "Email")
     @Expose
     private String email;
+    @Column(name = "Phone")
     @Expose
     private String phone;
     @SerializedName("phone_2")
+    @Column(name = "Phone2")
     @Expose
     private String phone2;
+    @Column(name = "Rating")
     @Expose
     private String rating;
+    @Column(name = "Lat")
     @Expose
     private String lat;
+    @Column(name = "Lng")
     @Expose
     private String lng;
+    @Column(name = "Price")
     @Expose
     private String price;
+    @Column(name = "CoverPhoto")
     @Expose
     private String cover_photo;
+    @Column(name = "City")
     @Expose
     private String city;
+    @Column(name = "Type")
     @Expose
     private String type;
+    @Column(name = "UserNickname")
     @SerializedName("user_nickname")
     @Expose
     private String userNickname;
+    @Column(name = "UserEmail")
     @SerializedName("user_email")
     @Expose
     private String userEmail;
+    @Column(name = "UserPhone")
     @SerializedName("user_phone")
     @Expose
     private String userPhone;
@@ -53,8 +77,8 @@ public class ApartmentResponse {
      * @return
      * The id
      */
-    public String getId() {
-        return id;
+    public String getIdMember() {
+        return idMember;
     }
 
     /**
@@ -62,8 +86,8 @@ public class ApartmentResponse {
      * @param id
      * The id
      */
-    public void setId(String id) {
-        this.id = id;
+    public void setIdMember(String id) {
+        this.idMember = id;
     }
 
     /**
@@ -390,4 +414,34 @@ public class ApartmentResponse {
         this.userPhone = userPhone;
     }
 
+    public ApartmentResponse(String idMember, String name, String description, String capacity,
+                             String stars, String address, String email, String phone,
+                             String phone2, String rating, String lat, String lng, String price,
+                             String cover_photo, String city, String type, String userNickname,
+                             String userEmail, String userPhone) {
+        super();
+        this.idMember = idMember;
+        this.name = name;
+        this.description = description;
+        this.capacity = capacity;
+        this.stars = stars;
+        this.address = address;
+        this.email = email;
+        this.phone = phone;
+        this.phone2 = phone2;
+        this.rating = rating;
+        this.lat = lat;
+        this.lng = lng;
+        this.price = price;
+        this.cover_photo = cover_photo;
+        this.city = city;
+        this.type = type;
+        this.userNickname = userNickname;
+        this.userEmail = userEmail;
+        this.userPhone = userPhone;
+    }
+
+    public ApartmentResponse() {
+        super();
+    }
 }

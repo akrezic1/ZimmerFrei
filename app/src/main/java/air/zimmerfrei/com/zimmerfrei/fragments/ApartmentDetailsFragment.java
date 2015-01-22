@@ -1,7 +1,5 @@
 package air.zimmerfrei.com.zimmerfrei.fragments;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -16,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import air.zimmerfrei.com.zimmerfrei.R;
+import air.zimmerfrei.com.zimmerfrei.SharedPrefsHelper;
 import air.zimmerfrei.com.zimmerfrei.SwypeFragment;
 import air.zimmerfrei.com.zimmerfrei.adapters.ApartmentDetailsPager;
 import air.zimmerfrei.com.zimmerfrei.datamodel.ResponseStatus;
@@ -26,7 +25,6 @@ import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-
 
 /**
  * Created by Andro on 10.11.2014..
@@ -145,7 +143,11 @@ public class ApartmentDetailsFragment extends SwypeFragment {
                 .build();
 
         ProfileAPI api = adapter.create(ProfileAPI.class);
-        api.setUserFavorite(getAuthToken(), getUsername(), Integer.parseInt(listResponse.getResponse().get(0).getId()), new Callback<ResponseStatus>() {
+        api.setUserFavorite(
+                SharedPrefsHelper.getAuthToken(getActivity()),
+                SharedPrefsHelper.getUsername(getActivity()),
+                Integer.parseInt(listResponse.getResponse().get(0).getId()),
+                new Callback<ResponseStatus>() {
             @Override
             public void success(ResponseStatus responseStatus, Response response) {
                 if (responseStatus.getStatus() == 200) {
@@ -159,17 +161,5 @@ public class ApartmentDetailsFragment extends SwypeFragment {
                 Log.d("BOOKMARK", error.getMessage());
             }
         });
-    }
-
-    
-
-    private String getAuthToken() {
-        SharedPreferences prefs = getActivity().getSharedPreferences("air.zimmerfrei.com.zimmerfrei", Context.MODE_PRIVATE);
-        return prefs.getString("token", "error");
-    }
-
-    private String getUsername() {
-        SharedPreferences prefs = getActivity().getSharedPreferences("air.zimmerfrei.com.zimmerfrei", Context.MODE_PRIVATE);
-        return prefs.getString("username", "error");
     }
 }

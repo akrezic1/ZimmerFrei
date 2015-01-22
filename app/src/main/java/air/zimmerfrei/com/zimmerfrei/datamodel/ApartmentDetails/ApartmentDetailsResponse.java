@@ -1,8 +1,9 @@
 package air.zimmerfrei.com.zimmerfrei.datamodel.apartmentdetails;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.ArrayList;
 import java.util.List;
-import com.google.gson.annotations.Expose;
 
 public class ApartmentDetailsResponse {
 
