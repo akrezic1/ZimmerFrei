@@ -2,6 +2,7 @@
 <resources>
 
     <string name="ENDPOINT">http://188.226.150.65</string>
+
     <string name="app_name">ZimmerFrei</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -10,12 +11,12 @@
     <string name="apartment_pic">Apartment cover_photo</string>
     <string name="action_bookmark">Bookmark</string>
     <string name="title_home">Home</string>
-    <string name="title_section1">Near me (map)</string>
-    <string name="title_section2">Near me (list)</string>
-    <string name="title_section3">My places</string>
-    <string name="title_section4">Profile</string>
-    <string name="title_section5">Help</string>
-    <string name="title_section6">About</string>
+    <string name="title_section_map">Near me (map)</string>
+    <string name="title_section_list">Near me (list)</string>
+    <string name="title_section_my_places">My places</string>
+    <string name="title_section_profile">Profile</string>
+    <string name="title_section_help">Help</string>
+    <string name="title_section_about">About</string>
     <string name="title_apartment_details">Apartment details</string>
     <string name="location_error">GPS location not found</string>
     <string name="look_here">Look here?</string>

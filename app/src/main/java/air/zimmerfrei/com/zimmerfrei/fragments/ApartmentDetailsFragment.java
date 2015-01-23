@@ -97,6 +97,8 @@ public class ApartmentDetailsFragment extends SwypeFragment {
         TextView name = (TextView) getView().findViewById(R.id.text_apartment_name);
         name.setText(listResponse.getResponse().get(0).getName());
 
+        getActivity().getActionBar().setTitle(listResponse.getResponse().get(0).getName());
+
         RatingBar rating = (RatingBar) getView().findViewById(R.id.rating_apartment);
         rating.setRating(Float.parseFloat(listResponse.getResponse().get(0).getRating()));
 

@@ -83,4 +83,9 @@ public class NearMeListFragment extends ApartmentListFragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().getActionBar().setTitle(R.string.near_me);
+    }
 }

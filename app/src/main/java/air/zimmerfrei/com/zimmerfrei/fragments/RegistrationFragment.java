@@ -115,4 +115,10 @@ public class RegistrationFragment extends SwypeFragment implements View.OnClickL
             }
         });
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().getActionBar().setTitle(R.string.registration);
+    }
 }

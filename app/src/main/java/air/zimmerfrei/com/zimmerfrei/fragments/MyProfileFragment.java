@@ -116,4 +116,10 @@ public class MyProfileFragment extends Fragment implements View.OnClickListener 
                 .setCustomAnimations(R.animator.enter_bottom, R.animator.exit_top, 0, 0)
                 .commit();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().getActionBar().setTitle(R.string.title_section_profile);
+    }
 }

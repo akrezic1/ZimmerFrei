@@ -49,6 +49,10 @@ public class NearMeMapFragment extends Fragment implements GoogleMap.OnInfoWindo
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
 
+    /**
+     * ENDPOINT is base location of web services
+     */
+    public static final String ENDPOINT = "http://188.226.150.65";
     List<ApartmentResponse> listApartment;
 
     /**
@@ -103,7 +107,7 @@ public class NearMeMapFragment extends Fragment implements GoogleMap.OnInfoWindo
      */
     private void requestData(String lat, String lng, String range) {
         final RestAdapter adapter = new RestAdapter.Builder()
-                .setEndpoint(getResources().getString(R.string.ENDPOINT))
+                .setEndpoint(ENDPOINT)
                 .build();
 
         ApartmentAPI api = adapter.create(ApartmentAPI.class);
@@ -159,6 +163,7 @@ public class NearMeMapFragment extends Fragment implements GoogleMap.OnInfoWindo
     @Override
     public void onResume() {
         super.onResume();
+        getActivity().getActionBar().setTitle(R.string.title_section_map);
         if (mMap == null) {
             mMap = mFragment.getMap();
         }

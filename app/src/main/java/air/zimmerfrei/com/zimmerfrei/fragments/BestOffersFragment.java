@@ -68,6 +68,11 @@ public class BestOffersFragment extends ApartmentListFragment {
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().getActionBar().setTitle(R.string.best_offers);
+    }
 }
 
 

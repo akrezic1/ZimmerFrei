@@ -147,4 +147,10 @@ public class MyPlacesFragment extends ApartmentListFragment {
             ActiveAndroid.endTransaction();
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().getActionBar().setTitle(R.string.title_section_my_places);
+    }
 }

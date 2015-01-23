@@ -73,4 +73,10 @@ public class LoginOrRegisterFragment extends Fragment implements View.OnClickLis
                 break;
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().getActionBar().setTitle(R.string.app_name);
+    }
 }

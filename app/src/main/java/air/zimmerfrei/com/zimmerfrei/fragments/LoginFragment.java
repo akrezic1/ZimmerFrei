@@ -134,5 +134,6 @@ public class LoginFragment extends SwypeFragment implements View.OnClickListener
     @Override
     public void onResume() {
         super.onResume();
+        getActivity().getActionBar().setTitle(R.string.login);
     }
 }
