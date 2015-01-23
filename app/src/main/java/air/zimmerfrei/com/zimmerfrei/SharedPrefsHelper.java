@@ -28,6 +28,23 @@ public class SharedPrefsHelper {
         sp.edit().putString("email", profile.getResponse().getEmail()).apply();
     }
 
+    /**
+     * @return Application's {@code SharedPreferences}.
+     */
+    public static SharedPreferences getGCMPreferences(Context context) {
+        return context.getSharedPreferences("air.zimmerfrei.com.zimmerfrei", Context.MODE_PRIVATE);
+    }
+
+    /**
+     * Get Google Cloud Messaging ID used for push notifications
+     * @param context application context
+     * @return returns string with GCM ID
+     */
+    public static String getGCMid(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences("air.zimmerfrei.com.zimmerfrei", Context.MODE_PRIVATE);
+        return prefs.getString("registration_id", "error");
+    }
+
     public static String getAuthToken(Context context) {
         SharedPreferences prefs = context.getSharedPreferences("air.zimmerfrei.com.zimmerfrei", Context.MODE_PRIVATE);
         return prefs.getString("token", "error");

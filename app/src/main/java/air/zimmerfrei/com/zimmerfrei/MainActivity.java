@@ -2,8 +2,7 @@ package air.zimmerfrei.com.zimmerfrei;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -13,16 +12,13 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.activeandroid.ActiveAndroid;
-import com.activeandroid.query.Select;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 
-import air.zimmerfrei.com.zimmerfrei.datamodel.apartment.ApartmentResponse;
 import air.zimmerfrei.com.zimmerfrei.fragments.AboutFragment;
 import air.zimmerfrei.com.zimmerfrei.fragments.HelpFragment;
 import air.zimmerfrei.com.zimmerfrei.fragments.HomeFragment;
-import air.zimmerfrei.com.zimmerfrei.fragments.LoginOrRegisterFragment;
 import air.zimmerfrei.com.zimmerfrei.fragments.MyPlacesFragment;
 import air.zimmerfrei.com.zimmerfrei.fragments.MyProfileFragment;
 import air.zimmerfrei.com.zimmerfrei.fragments.NearMeListFragment;
@@ -101,10 +97,11 @@ public class MainActivity extends FragmentActivity implements
                 fragment = MyPlacesFragment.newInstance(position + 1);
                 break;
             case 4:
-                if (loadToken() == 1) {
-                    fragment = MyProfileFragment.newInstance(position + 1);
+                if (SharedPrefsHelper.getAuthToken(this).equals("error")) {
+                    Intent intent = new Intent(this, LoginActivity.class);
+                    startActivity(intent);
                 } else {
-                    fragment = LoginOrRegisterFragment.newInstance(position + 1);
+                    fragment = MyProfileFragment.newInstance(position + 1);
                 }
                 break;
             case 5:
@@ -183,12 +180,9 @@ public class MainActivity extends FragmentActivity implements
         client.disconnect();
     }
 
-    private int loadToken () {
-        SharedPreferences sp = this.getSharedPreferences("air.zimmerfrei.com.zimmerfrei", Context.MODE_PRIVATE);
-        String token = sp.getString("token", "Error obtaining token");
-        if (token.equals("Error obtaining token"))
-            return 0;
-        else
-            return 1;
+    @Override
+    protected void onResume() {
+        super.onResume();
+        onNavigationDrawerItemSelected(0);
     }
 }

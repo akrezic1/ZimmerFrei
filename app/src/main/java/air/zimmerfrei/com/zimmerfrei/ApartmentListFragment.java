@@ -22,11 +22,6 @@ public abstract class ApartmentListFragment extends ListFragment{
      */
     protected static final String ARG_SECTION_NUMBER = "section_number";
 
-    /**
-     * ENDPOINT is base location of web services
-     */
-    public static final String ENDPOINT = "http://188.226.150.65";
-
     protected List<ApartmentResponse> listApartment;
 
     @Override

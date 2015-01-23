@@ -59,7 +59,7 @@ public class NearMeListFragment extends ApartmentListFragment {
         listApartment = new ArrayList<>();
 
         RestAdapter adapter = new RestAdapter.Builder()
-                .setEndpoint(ENDPOINT)
+                .setEndpoint(getResources().getString(R.string.ENDPOINT))
                 .build();
 
         if (lat == null || lng == null) {

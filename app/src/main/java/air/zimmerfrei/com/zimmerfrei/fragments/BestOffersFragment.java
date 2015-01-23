@@ -48,7 +48,7 @@ public class BestOffersFragment extends ApartmentListFragment {
         listApartment = new ArrayList<>();
 
         RestAdapter adapter = new RestAdapter.Builder()
-                .setEndpoint(ENDPOINT)
+                .setEndpoint(getResources().getString(R.string.ENDPOINT))
                 .build();
 
         ApartmentAPI api = adapter.create(ApartmentAPI.class);

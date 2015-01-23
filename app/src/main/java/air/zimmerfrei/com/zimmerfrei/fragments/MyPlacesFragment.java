@@ -1,7 +1,7 @@
 package air.zimmerfrei.com.zimmerfrei.fragments;
 
-import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import air.zimmerfrei.com.zimmerfrei.ApartmentListFragment;
+import air.zimmerfrei.com.zimmerfrei.LoginActivity;
 import air.zimmerfrei.com.zimmerfrei.R;
 import air.zimmerfrei.com.zimmerfrei.SharedPrefsHelper;
 import air.zimmerfrei.com.zimmerfrei.datamodel.apartment.Apartment;
@@ -56,12 +57,8 @@ public class MyPlacesFragment extends ApartmentListFragment {
                 requestData();
             } else {
                 Toast.makeText(getActivity(), R.string.login_or_register, Toast.LENGTH_LONG).show();
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction()
-                        .setCustomAnimations(R.animator.enter_right, R.animator.exit_left, 0, R.animator.exit_right)
-                        .addToBackStack(null)
-                        .add(R.id.container, LoginOrRegisterFragment.newInstance(1))
-                        .commit();
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
             }
         } else {
             listApartment = loadFromDB();
@@ -89,7 +86,7 @@ public class MyPlacesFragment extends ApartmentListFragment {
         listApartment = new ArrayList<>();
 
         RestAdapter adapter = new RestAdapter.Builder()
-                .setEndpoint(ENDPOINT)
+                .setEndpoint(getResources().getString(R.string.ENDPOINT))
                 .build();
 
         ProfileAPI api = adapter.create(ProfileAPI.class);

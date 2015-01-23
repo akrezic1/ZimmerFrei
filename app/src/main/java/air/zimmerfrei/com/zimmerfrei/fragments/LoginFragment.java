@@ -1,8 +1,5 @@
 package air.zimmerfrei.com.zimmerfrei.fragments;
 
-import android.app.FragmentManager;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,11 +29,6 @@ public class LoginFragment extends SwypeFragment implements View.OnClickListener
      * fragment.
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
-
-    /**
-     * ENDPOINT is base location of web services
-     */
-    public static final String ENDPOINT = "http://188.226.150.65";
 
     public static String laravelToken;
 
@@ -83,7 +75,7 @@ public class LoginFragment extends SwypeFragment implements View.OnClickListener
 
     private void getLaravelToken() {
         RestAdapter adapter = new RestAdapter.Builder()
-                .setEndpoint(ENDPOINT)
+                .setEndpoint(getResources().getString(R.string.ENDPOINT))
                 .build();
 
         LoginAPI api = adapter.create(LoginAPI.class);
@@ -109,7 +101,7 @@ public class LoginFragment extends SwypeFragment implements View.OnClickListener
      */
     private void requestData(String user, String pass, String token) {
         RestAdapter adapter = new RestAdapter.Builder()
-                .setEndpoint(ENDPOINT)
+                .setEndpoint(getResources().getString(R.string.ENDPOINT))
                 .build();
 
         LoginAPI api = adapter.create(LoginAPI.class);
@@ -119,7 +111,7 @@ public class LoginFragment extends SwypeFragment implements View.OnClickListener
             public void success(Profile profile, retrofit.client.Response response) {
                 if (profile.getStatus() == 200) {
                     SharedPrefsHelper.saveToSharedPref(profile, getActivity());
-                    openProfile();
+                    closeActivity();
                 } else {
                     Toast.makeText(getActivity(), R.string.wrong_user_pass, Toast.LENGTH_SHORT).show();
                 }
@@ -133,13 +125,14 @@ public class LoginFragment extends SwypeFragment implements View.OnClickListener
     }
 
     /**
-     * Open MyProfileFragment after saving users data
+     * Close LoginActivity after login and get back to MainActivity
      */
-    protected void openProfile() {
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                .setCustomAnimations(R.animator.enter_bottom, R.animator.exit_top, 0, 0)
-                .replace(R.id.container, MyProfileFragment.newInstance(1))
-                .commit();
+    protected void closeActivity() {
+        getActivity().finish();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 }

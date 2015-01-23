@@ -40,11 +40,6 @@ public class ApartmentDetailsFragment extends SwypeFragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     /**
-     * ENDPOINT is base location of web services
-     */
-    public static final String ENDPOINT = "http://188.226.150.65/";
-
-    /**
      * Returns a new instance of this fragment for the given section
      * number.
      */
@@ -77,7 +72,7 @@ public class ApartmentDetailsFragment extends SwypeFragment {
      */
     private void requestData() {
         RestAdapter adapter = new RestAdapter.Builder()
-                .setEndpoint(ENDPOINT)
+                .setEndpoint(getResources().getString(R.string.ENDPOINT))
                 .build();
 
         ApartmentAPI api = adapter.create(ApartmentAPI.class);
@@ -139,7 +134,7 @@ public class ApartmentDetailsFragment extends SwypeFragment {
 
     private void bookmarkApartment() {
         RestAdapter adapter = new RestAdapter.Builder()
-                .setEndpoint(ENDPOINT)
+                .setEndpoint(getResources().getString(R.string.ENDPOINT))
                 .build();
 
         ProfileAPI api = adapter.create(ProfileAPI.class);
