@@ -10,6 +10,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import air.zimmerfrei.com.zimmerfrei.ApartmentListFragment;
+import air.zimmerfrei.com.zimmerfrei.MainActivity;
 import air.zimmerfrei.com.zimmerfrei.R;
 import air.zimmerfrei.com.zimmerfrei.datamodel.apartment.Apartment;
 import air.zimmerfrei.com.zimmerfrei.webservice.ApartmentAPI;
@@ -51,9 +52,12 @@ public class BestOffersFragment extends ApartmentListFragment {
                 .setEndpoint(getResources().getString(R.string.ENDPOINT))
                 .build();
 
+        double lat = MainActivity.latitude;
+        double lng = MainActivity.longitude;
+
         ApartmentAPI api = adapter.create(ApartmentAPI.class);
 
-        api.getBestOffers(new Callback<Apartment>() {
+        api.getBestOffers(String.valueOf(lat), String.valueOf(lng), new Callback<Apartment>() {
             @Override
             public void success(Apartment apartments, Response response) {
                 listApartment = apartments.getResponse();

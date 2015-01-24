@@ -21,10 +21,12 @@
 
     <Button
         android:id="@+id/btn_login"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_marginTop="15dp"
+        android:textColor="@color/frei_grey"
         android:layout_height="wrap_content"
         android:text="@string/login"
+        android:background="@drawable/button_dark_blue"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/btn_create_acc"
         android:layout_alignEnd="@+id/btn_create_acc"
@@ -32,8 +34,10 @@
 
     <Button
         android:id="@+id/btn_create_acc"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
+        android:textColor="@color/frei_grey"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_blue"
         android:text="@string/create_account"
         android:ems="10"
         android:layout_above="@id/btn_login"

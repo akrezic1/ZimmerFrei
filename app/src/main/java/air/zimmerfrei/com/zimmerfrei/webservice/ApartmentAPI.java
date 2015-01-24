@@ -33,10 +33,14 @@ public interface ApartmentAPI {
     @GET("/api/v1/apartmentDetails")
     public void getApartmentDetails(
             @Query("apartment_id") int id,
+            @Query("lat") String lat,
+            @Query("lng") String lng,
             Callback<ApartmentDetailsResponse> response);
 
     @GET("/api/v1/apartmentSpecialOffers")
     public void getBestOffers(
+            @Query("lat") String lat,
+            @Query("lng") String lng,
             Callback<Apartment> apartment
     );
 

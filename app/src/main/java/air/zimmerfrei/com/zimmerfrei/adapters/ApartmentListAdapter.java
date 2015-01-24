@@ -35,15 +35,23 @@ public class ApartmentListAdapter extends ArrayAdapter<ApartmentResponse> {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.list_my_places, parent, false);
+        View view = inflater.inflate(R.layout.list_near_me, parent, false);
 
         ApartmentResponse apartment = listApartment.get(position);
 
         ImageView image = (ImageView) view.findViewById(R.id.imageApartment);
         Picasso.with(context).load(apartment.getCover_photo()).into(image);
 
-        TextView address = (TextView) view.findViewById(R.id.addressNearMe);
-        address.setText(apartment.getAddress());
+        if (apartment.getDistanceTo() != null) {
+            TextView address = (TextView) view.findViewById(R.id.distanceNearMe);
+            address.setText(apartment.getDistanceTo() + " km");
+        }
+
+        TextView price = (TextView) view.findViewById(R.id.list_price);
+        price.setText(" " + apartment.getPrice() + "€");
+
+        TextView nameAndAddress = (TextView) view.findViewById(R.id.list_name_address);
+        nameAndAddress.setText(apartment.getName() + ", " + apartment.getAddress());
 
         RatingBar rating = (RatingBar) view.findViewById(R.id.ratingNearMe);
         rating.setRating(Float.parseFloat(apartment.getRating()));

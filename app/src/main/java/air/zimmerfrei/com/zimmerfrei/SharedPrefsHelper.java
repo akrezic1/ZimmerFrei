@@ -1,6 +1,8 @@
 package air.zimmerfrei.com.zimmerfrei;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 
 import air.zimmerfrei.com.zimmerfrei.datamodel.profile.Profile;
@@ -26,6 +28,29 @@ public class SharedPrefsHelper {
         sp.edit().putString("avatar", profile.getResponse().getAvatar()).apply();
         sp.edit().putString("phone", profile.getResponse().getPhone()).apply();
         sp.edit().putString("email", profile.getResponse().getEmail()).apply();
+    }
+
+    public static void signOutAlert(final Context context) {
+        new AlertDialog.Builder(context)
+                .setTitle(R.string.logout)
+                .setMessage(R.string.are_you_sure_logout)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteSharedPref(context);
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+    public static void deleteSharedPref(Context context) {
+        SharedPreferences sp = context.getSharedPreferences("air.zimmerfrei.com.zimmerfrei", Context.MODE_PRIVATE);
+        sp.edit().clear().apply();
     }
 
     /**

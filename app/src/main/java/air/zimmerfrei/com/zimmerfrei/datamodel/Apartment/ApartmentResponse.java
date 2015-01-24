@@ -71,6 +71,9 @@ public class ApartmentResponse extends Model {
     @SerializedName("user_phone")
     @Expose
     private String userPhone;
+    @SerializedName("distance_to")
+    @Expose
+    private String distanceTo;
 
     /**
      *
@@ -412,6 +415,24 @@ public class ApartmentResponse extends Model {
      */
     public void setUserPhone(String userPhone) {
         this.userPhone = userPhone;
+    }
+
+    /**
+     *
+     * @return
+     * The distanceTo
+     */
+    public String getDistanceTo() {
+        return distanceTo;
+    }
+
+    /**
+     *
+     * @param distanceTo
+     * The distance_to
+     */
+    public void setDistanceTo(String distanceTo) {
+        this.distanceTo = distanceTo;
     }
 
     public ApartmentResponse(String idMember, String name, String description, String capacity,

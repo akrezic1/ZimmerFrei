@@ -13,18 +13,18 @@
         android:contentDescription="@string/apartment_pic" />
 
     <TextView
-        android:id="@+id/addressNearMe"
+        android:id="@+id/distanceNearMe"
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="10km"
         android:textSize="20sp"
         android:background="#aaf1c40f"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="10dp"
-        android:layout_marginRight="10dp" />
+        android:layout_marginRight="10dp"
+        android:text="0km" />
 
 
     <RatingBar
@@ -36,7 +36,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:numStars="5"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text=" 0€"
+        android:id="@+id/list_price"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="39dp"
+        android:background="#b9000000"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name, Address"
+        android:id="@+id/list_name_address"
+        android:layout_below="@+id/list_price"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/white"
+        android:background="#b9000000" />
 
 
 </RelativeLayout>

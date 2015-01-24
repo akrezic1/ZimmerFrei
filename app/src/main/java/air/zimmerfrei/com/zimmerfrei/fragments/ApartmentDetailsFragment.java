@@ -13,6 +13,9 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.viewpagerindicator.CirclePageIndicator;
+
+import air.zimmerfrei.com.zimmerfrei.MainActivity;
 import air.zimmerfrei.com.zimmerfrei.R;
 import air.zimmerfrei.com.zimmerfrei.SharedPrefsHelper;
 import air.zimmerfrei.com.zimmerfrei.SwypeFragment;
@@ -78,8 +81,10 @@ public class ApartmentDetailsFragment extends SwypeFragment {
         ApartmentAPI api = adapter.create(ApartmentAPI.class);
 
         Bundle bundle = getArguments();
+        double lat = MainActivity.latitude;
+        double lng = MainActivity.longitude;
 
-        api.getApartmentDetails(bundle.getInt("ID"), new Callback<ApartmentDetailsResponse>() {
+        api.getApartmentDetails(bundle.getInt("ID"), String.valueOf(lat), String.valueOf(lng), new Callback<ApartmentDetailsResponse>() {
             @Override
             public void success(ApartmentDetailsResponse apartmentResponse, Response response) {
                 listResponse = apartmentResponse;
@@ -105,6 +110,11 @@ public class ApartmentDetailsFragment extends SwypeFragment {
         TextView details = (TextView) getView().findViewById(R.id.text_apartment_details);
         details.setText(listResponse.getResponse().get(0).getDescription());
 
+        if (listResponse.getResponse().get(0).getDistanceTo() != null) {
+            TextView distance = (TextView) getView().findViewById(R.id.apartmentDetailsDistance);
+            distance.setText(listResponse.getResponse().get(0).getDistanceTo() + "km " + getActivity().getString(R.string.distance));
+        }
+
         int size = listResponse.getResponse().get(0).getPictures().size();
         String[] pictures = new String[size + 1];
         if (size == 0) {
@@ -117,6 +127,9 @@ public class ApartmentDetailsFragment extends SwypeFragment {
         ViewPager pager = (ViewPager) getView().findViewById(R.id.pager_apartment_details);
         ApartmentDetailsPager adapter = new ApartmentDetailsPager(getActivity(), pictures);
         pager.setAdapter(adapter);
+
+        CirclePageIndicator indicator = (CirclePageIndicator) getView().findViewById(R.id.titles);
+        indicator.setViewPager(pager);
     }
 
 

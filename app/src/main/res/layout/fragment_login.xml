@@ -13,20 +13,23 @@
     <EditText
         android:id="@+id/username"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:layout_centerVertical="true"
+        android:layout_height="35dp"
+        style="@style/RegistrationInput"
+        android:background="@drawable/edit_text_design"
+        android:hint="@string/username"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:hint="@string/username"/>
+        android:layout_marginTop="147dp" />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:inputType="textPassword"
-        android:ems="10"
+        style="@style/RegistrationInput"
+        android:background="@drawable/edit_text_design"
         android:hint="@string/password"
-        android:layout_below="@id/username"
+        android:layout_below="@+id/username"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -35,8 +38,20 @@
         android:layout_height="wrap_content"
         android:text="@string/login"
         android:textColor="#FFFFFF"
-        android:background="@color/dark_blue"
-        android:layout_below="@id/password"
-        android:layout_alignEnd="@id/password"
-        android:layout_alignStart="@id/password" />
+        android:background="@drawable/button_blue"
+        android:layout_below="@+id/password"
+        android:layout_alignStart="@+id/password"
+        android:layout_marginTop="38dp"
+        android:layout_alignEnd="@+id/password" />
+
+    <TextView
+        android:id="@+id/textTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/login_with_account"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/frei_grey"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

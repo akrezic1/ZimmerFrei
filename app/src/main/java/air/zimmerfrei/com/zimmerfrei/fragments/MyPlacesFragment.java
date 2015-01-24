@@ -138,6 +138,7 @@ public class MyPlacesFragment extends ApartmentListFragment {
                 apartment.setUserEmail(list.get(i).getUserEmail());
                 apartment.setUserNickname(list.get(i).getUserNickname());
                 apartment.setUserPhone(list.get(i).getUserPhone());
+                apartment.setDistanceTo(getString(R.string.unknown)); // if there is no internet, can't calculate distance
 
                 apartment.save();
             }

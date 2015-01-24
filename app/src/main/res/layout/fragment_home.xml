@@ -16,19 +16,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/near_me"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
         android:ems="10"
-        android:layout_marginBottom="15dp" />
+        android:background="@drawable/button_white"
+        android:layout_above="@+id/button_best_offers"
+        android:layout_alignStart="@+id/button_best_offers"
+        android:layout_marginBottom="24dp"
+        android:layout_alignEnd="@+id/button_best_offers" />
 
     <Button
         android:id="@+id/button_best_offers"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="@string/best_offers"
-        android:layout_below="@+id/button_near_me"
-        android:layout_alignEnd="@+id/button_near_me"
         android:ems="10"
-        android:textColor="#EEEEEE"
-         />
+        android:textColor="#EEE"
+        android:background="@drawable/button_blue"
+        android:layout_marginBottom="149dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

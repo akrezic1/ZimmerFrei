@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="android:Theme.Holo.Light">
+    <style name="AppTheme" parent="android:Theme.Material.Light.DarkActionBar">
+        <item name="android:colorPrimary">@color/dark_blue</item>
+        <item name="android:colorPrimaryDark">#ff0f2631</item>
+        <item name="android:colorAccent">@color/light_blue</item>
+        <item name="android:ratingBarStyle">@android:style/Widget.Holo.RatingBar</item>
     </style>
 </resources>

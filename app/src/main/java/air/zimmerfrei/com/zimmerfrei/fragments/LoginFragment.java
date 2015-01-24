@@ -1,9 +1,12 @@
 package air.zimmerfrei.com.zimmerfrei.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +51,9 @@ public class LoginFragment extends SwypeFragment implements View.OnClickListener
 
     }
 
+    TextView username;
+    TextView password;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
@@ -55,14 +61,19 @@ public class LoginFragment extends SwypeFragment implements View.OnClickListener
         getLaravelToken();
         btnLogin.setOnClickListener(this);
         view.setOnTouchListener(this);
+
+        username = (TextView) view.findViewById(R.id.username);
+        password = (TextView) view.findViewById(R.id.password);
+        if(username.requestFocus()) {
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(username, InputMethodManager.SHOW_IMPLICIT);
+        }
+
         return view;
     }
 
     @Override
     public void onClick(View v) {
-        TextView username = (TextView) getView().findViewById(R.id.username);
-        TextView password = (TextView) getView().findViewById(R.id.password);
-
         String user = username.getText().toString();
         String pass = password.getText().toString();
 

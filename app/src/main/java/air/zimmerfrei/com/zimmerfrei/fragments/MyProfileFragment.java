@@ -1,10 +1,8 @@
 package air.zimmerfrei.com.zimmerfrei.fragments;
 
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,6 +15,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import air.zimmerfrei.com.zimmerfrei.R;
+import air.zimmerfrei.com.zimmerfrei.SharedPrefsHelper;
 import air.zimmerfrei.com.zimmerfrei.adapters.CircleTransform;
 
 /**
@@ -24,7 +23,7 @@ import air.zimmerfrei.com.zimmerfrei.adapters.CircleTransform;
  */
 public class MyProfileFragment extends Fragment implements View.OnClickListener {
 
-    private String name, surname, email, phone, avatar;
+    private String name, surname, email, phone, avatar, username;
 
 
     /**
@@ -60,11 +59,19 @@ public class MyProfileFragment extends Fragment implements View.OnClickListener 
         getUserData();
 
         ImageView imageView = (ImageView) view.findViewById(R.id.profile_image);
-        Picasso.with(getActivity()).load(avatar).transform(new CircleTransform()).into(imageView);
+        if (!avatar.equals("error")) {
+            Picasso.with(getActivity()).load(avatar).transform(new CircleTransform()).into(imageView);
+        } else {
+            imageView.setImageResource(R.drawable.profile);
+        }
 
         TextView fullname = (TextView) view.findViewById(R.id.profile_name_lastname);
-        String fullName = name + " " + surname;
-        fullname.setText(fullName);
+        if (name.equals("error") || surname.equals("error")) {
+            fullname.setText(username);
+        } else {
+            String fullName = name + " " + surname;
+            fullname.setText(fullName);
+        }
 
         Button btnLogout = (Button) view.findViewById(R.id.profile_logout);
         btnLogout.setOnClickListener(this);
@@ -78,36 +85,16 @@ public class MyProfileFragment extends Fragment implements View.OnClickListener 
         email = sp.getString("email", "error");
         phone = sp.getString("phone", "error");
         avatar = sp.getString("avatar", "error");
+        username = sp.getString("username", "error");
     }
 
     @Override
     public void onClick(View v) {
-        alertDialog();
+        SharedPrefsHelper.signOutAlert(getActivity());
+        openHome();
     }
 
-    private void alertDialog() {
-        new AlertDialog.Builder(getActivity())
-                .setTitle(R.string.logout)
-                .setMessage(R.string.are_you_sure_logout)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        deleteSharedPref();
-                        openHome();
-                    }
-                })
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // do nothing
-                    }
-                })
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
-    }
 
-    private void deleteSharedPref() {
-        SharedPreferences sp = getActivity().getSharedPreferences("air.zimmerfrei.com.zimmerfrei", Context.MODE_PRIVATE);
-        sp.edit().clear().apply();
-    }
 
     private void openHome() {
         FragmentManager fragmentManager = getFragmentManager();

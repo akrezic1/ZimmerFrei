@@ -1,11 +1,11 @@
 package air.zimmerfrei.com.zimmerfrei;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,7 +25,7 @@ import air.zimmerfrei.com.zimmerfrei.fragments.NearMeListFragment;
 import air.zimmerfrei.com.zimmerfrei.fragments.NearMeMapFragment;
 
 
-public class MainActivity extends FragmentActivity implements
+public class MainActivity extends Activity implements
         NavigationDrawerCallbacks,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
@@ -80,21 +80,24 @@ public class MainActivity extends FragmentActivity implements
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-        FragmentManager fragmentManager = getFragmentManager();
-        Fragment fragment = new Fragment();
+        Fragment fragment;
 
         switch (position) {
             case 0:
                 fragment = HomeFragment.newInstance(position + 1);
+                switchFragment(fragment);
                 break;
             case 1:
                 fragment = NearMeMapFragment.newInstance(position + 1);
+                switchFragment(fragment);
                 break;
             case 2:
                 fragment = NearMeListFragment.newInstance(position + 1);
+                switchFragment(fragment);
                 break;
             case 3:
                 fragment = MyPlacesFragment.newInstance(position + 1);
+                switchFragment(fragment);
                 break;
             case 4:
                 if (SharedPrefsHelper.getAuthToken(this).equals("error")) {
@@ -102,38 +105,36 @@ public class MainActivity extends FragmentActivity implements
                     startActivity(intent);
                 } else {
                     fragment = MyProfileFragment.newInstance(position + 1);
+                    switchFragment(fragment);
                 }
                 break;
             case 5:
                 fragment = HelpFragment.newInstance(position + 1);
+                switchFragment(fragment);
                 break;
             case 6:
                 fragment = AboutFragment.newInstance(position + 1);
+                switchFragment(fragment);
                 break;
         }
+    }
 
-        if (position != 0) {
-            fragmentManager.beginTransaction()
-                    .setCustomAnimations(R.animator.enter_bottom, R.animator.exit_top, 0, R.animator.exit_bottom)
-                    .replace(R.id.container, fragment)
-                    .addToBackStack(null)
-                    .commit();
-        } else {
-            fragmentManager.beginTransaction()
-                    .setCustomAnimations(R.animator.enter_bottom, R.animator.exit_top, 0, R.animator.exit_bottom)
-                    .replace(R.id.container, fragment)
-                    .commit();
-        }
-
+    private void switchFragment (Fragment fragment) {
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .setCustomAnimations(R.animator.enter_bottom, R.animator.exit_top, R.animator.enter_top, R.animator.exit_bottom)
+                .replace(R.id.container, fragment)
+                .commit();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
-            // Only show items in the action bar relevant to this screen
-            // if the drawer is not showing. Otherwise, let the drawer
-            // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.main, menu);
+            if (SharedPrefsHelper.getAuthToken(this).equals("error")) {
+                getMenuInflater().inflate(R.menu.main, menu);
+            } else {
+                getMenuInflater().inflate(R.menu.main_signed_in, menu);
+            }
             return true;
         }
         return super.onCreateOptionsMenu(menu);
@@ -146,9 +147,12 @@ public class MainActivity extends FragmentActivity implements
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id) {
+            case R.id.action_login:
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+            case R.id.action_sign_out:
+                SharedPrefsHelper.signOutAlert(this);
         }
 
         return super.onOptionsItemSelected(item);
@@ -172,6 +176,8 @@ public class MainActivity extends FragmentActivity implements
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
         Toast.makeText(this, R.string.could_not_connect, Toast.LENGTH_SHORT).show();
+        latitude = 46.00;
+        longitude = 16.00;
     }
 
     @Override
@@ -183,6 +189,5 @@ public class MainActivity extends FragmentActivity implements
     @Override
     protected void onResume() {
         super.onResume();
-        onNavigationDrawerItemSelected(0);
     }
 }

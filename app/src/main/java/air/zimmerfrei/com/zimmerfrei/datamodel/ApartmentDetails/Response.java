@@ -58,6 +58,9 @@ public class Response {
     @SerializedName("user_phone")
     @Expose
     private String userPhone;
+    @SerializedName("distance_to")
+    @Expose
+    private String distanceTo;
 
     /**
      *
@@ -455,5 +458,22 @@ public class Response {
         this.userPhone = userPhone;
     }
 
+    /**
+     *
+     * @return
+     * The distance_to
+     */
+    public String getDistanceTo() {
+        return distanceTo;
+    }
+
+    /**
+     *
+     * @param distanceTo
+     * The distance_to
+     */
+    public void setDistanceTo(String distanceTo) {
+        this.distanceTo = distanceTo;
+    }
 
 }

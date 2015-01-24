@@ -44,7 +44,7 @@ public class NearMeListFragment extends ApartmentListFragment {
 
         double lat = MainActivity.latitude;
         double lng = MainActivity.longitude;
-        requestData(String.valueOf(lat), String.valueOf(lng), "1");
+        requestData(String.valueOf(lat), String.valueOf(lng), "5");
 
         return rootView;
     }
@@ -88,4 +88,6 @@ public class NearMeListFragment extends ApartmentListFragment {
         super.onResume();
         getActivity().getActionBar().setTitle(R.string.near_me);
     }
+
+
 }

@@ -4,17 +4,11 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/fragment_near_me_list">
+        android:id="@android:id/list"
+        tools:listitem="@layout/list_near_me"
+        />
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@android:id/list"
-            tools:listitem="@layout/list_near_me"
-            />
-
-    </FrameLayout>
 </LinearLayout>
