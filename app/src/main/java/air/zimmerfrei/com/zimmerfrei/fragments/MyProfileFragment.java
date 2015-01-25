@@ -66,7 +66,7 @@ public class MyProfileFragment extends Fragment implements View.OnClickListener 
         }
 
         TextView fullname = (TextView) view.findViewById(R.id.profile_name_lastname);
-        if (name.equals("error") || surname.equals("error")) {
+        if (name.equals("") || surname.equals("")) {
             fullname.setText(username);
         } else {
             String fullName = name + " " + surname;

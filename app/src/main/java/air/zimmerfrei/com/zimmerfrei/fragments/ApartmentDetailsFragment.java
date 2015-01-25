@@ -9,12 +9,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.viewpagerindicator.CirclePageIndicator;
 
+import air.zimmerfrei.com.zimmerfrei.DBHelper;
 import air.zimmerfrei.com.zimmerfrei.MainActivity;
 import air.zimmerfrei.com.zimmerfrei.R;
 import air.zimmerfrei.com.zimmerfrei.SharedPrefsHelper;
@@ -32,7 +35,7 @@ import retrofit.client.Response;
 /**
  * Created by Andro on 10.11.2014..
  */
-public class ApartmentDetailsFragment extends SwypeFragment {
+public class ApartmentDetailsFragment extends SwypeFragment implements CompoundButton.OnCheckedChangeListener {
 
     ApartmentDetailsResponse listResponse;
 
@@ -130,23 +133,18 @@ public class ApartmentDetailsFragment extends SwypeFragment {
 
         CirclePageIndicator indicator = (CirclePageIndicator) getView().findViewById(R.id.titles);
         indicator.setViewPager(pager);
+
+        ToggleButton bookmark = (ToggleButton) getView().findViewById(R.id.toggle_bookmark);
+        if (DBHelper.isApartmentSaved(listResponse.getResponse().get(0).getId()))
+            bookmark.setChecked(true);
+        else
+            bookmark.setChecked(false);
+        bookmark.setOnCheckedChangeListener(this);
     }
 
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_apartment_details, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_bookmark) {
-            bookmarkApartment();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
+    /**
+     * Method used to add apartment to bookmarks/MyPlaces
+     */
     private void bookmarkApartment() {
         RestAdapter adapter = new RestAdapter.Builder()
                 .setEndpoint(getResources().getString(R.string.ENDPOINT))
@@ -161,7 +159,7 @@ public class ApartmentDetailsFragment extends SwypeFragment {
             @Override
             public void success(ResponseStatus responseStatus, Response response) {
                 if (responseStatus.getStatus() == 200) {
-                    Toast.makeText(getActivity(), "Saved to MyPlaces", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.saved_myplaces, Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -171,5 +169,47 @@ public class ApartmentDetailsFragment extends SwypeFragment {
                 Log.d("BOOKMARK", error.getMessage());
             }
         });
+    }
+
+    /**
+     * Method used to remove apartment from bookmarks/MyPlaces
+     */
+    private void removeBookmark() {
+        RestAdapter adapter = new RestAdapter.Builder()
+                .setEndpoint(getResources().getString(R.string.ENDPOINT))
+                .build();
+
+        ProfileAPI api = adapter.create(ProfileAPI.class);
+        api.deleteUserFavorite(
+                SharedPrefsHelper.getAuthToken(getActivity()),
+                SharedPrefsHelper.getUsername(getActivity()),
+                Integer.parseInt(listResponse.getResponse().get(0).getId()),
+                new Callback<ResponseStatus>() {
+                    @Override
+                    public void success(ResponseStatus responseStatus, Response response) {
+                        Log.d("REMOVE", response.getReason());
+                        if (responseStatus.getStatus() == 200) {
+                            Toast.makeText(getActivity(), R.string.removed_myplaces, Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getActivity(), R.string.unauthorized, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        Log.d("REMOVE FAIL", error.getMessage());
+                        Toast.makeText(getActivity(), R.string.connection_fail, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (isChecked) {
+            bookmarkApartment();
+        } else {
+            removeBookmark();
+        }
     }
 }

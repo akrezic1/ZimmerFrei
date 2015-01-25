@@ -47,14 +47,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.button_near_me:
                 fragmentManager.beginTransaction()
-                        .setCustomAnimations(R.animator.enter_bottom, R.animator.exit_top, 0, 0)
+                        .setCustomAnimations(R.animator.enter_bottom, R.animator.exit_top, R.animator.enter_top, R.animator.exit_bottom)
                         .addToBackStack(HomeFragment.class.getName())
                         .replace(R.id.container, NearMeMapFragment.newInstance(1))
                         .commit();
                 break;
             case R.id.button_best_offers:
                 fragmentManager.beginTransaction()
-                        .setCustomAnimations(R.animator.enter_bottom, R.animator.exit_top, 0, 0)
+                        .setCustomAnimations(R.animator.enter_bottom, R.animator.exit_top, R.animator.enter_top, R.animator.exit_bottom)
                         .addToBackStack(HomeFragment.class.getName())
                         .replace(R.id.container, BestOffersFragment.newInstance(1))
                         .commit();

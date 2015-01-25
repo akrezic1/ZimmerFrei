@@ -55,11 +55,14 @@
     <string name="remove_bookmark">Remove</string>
     <string name="user_type">Traveler</string>
     <string name="sign_out">Sign out</string>
+    <string name="saved_myplaces">Saved to MyPlaces</string>
+    <string name="removed_myplaces">Removed from MyPlaces</string>
 
     <!-- errors -->
     <string name="connection_fail">Connection failed</string>
     <string name="no_play_services">No play services available</string>
     <string name="could_not_connect">Can\'t connect to GPS</string>
     <string name="location_error">GPS location not found</string>
+    <string name="unauthorized">Unauthorized</string>
 
 </resources>

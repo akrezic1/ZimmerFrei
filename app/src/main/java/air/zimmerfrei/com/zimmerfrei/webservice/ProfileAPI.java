@@ -23,6 +23,15 @@ public interface ProfileAPI {
     );
 
     @FormUrlEncoded
+    @POST("/api/v1/deleteUserFavorites")
+    public void deleteUserFavorite(
+            @Field("_token") String token,
+            @Field("username") String username,
+            @Field("apartment") int id,
+            Callback<ResponseStatus> response
+    );
+
+    @FormUrlEncoded
     @POST("/api/v1/getUserFavorites")
     public void getUserFavorites(
             @Field("_token") String token,

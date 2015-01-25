@@ -11,14 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.activeandroid.ActiveAndroid;
-import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import air.zimmerfrei.com.zimmerfrei.ApartmentListFragment;
+import air.zimmerfrei.com.zimmerfrei.DBHelper;
 import air.zimmerfrei.com.zimmerfrei.LoginActivity;
 import air.zimmerfrei.com.zimmerfrei.R;
 import air.zimmerfrei.com.zimmerfrei.SharedPrefsHelper;
@@ -98,7 +97,7 @@ public class MyPlacesFragment extends ApartmentListFragment {
             @Override
             public void success(Apartment apartments, Response response) {
                 listApartment = apartments.getResponse();
-                saveToDatabase(listApartment);
+                DBHelper.saveListApartment(listApartment);
                 updateDisplay(R.layout.list_my_places);
             }
 
@@ -110,44 +109,7 @@ public class MyPlacesFragment extends ApartmentListFragment {
         });
     }
 
-    private void saveToDatabase(List<ApartmentResponse> list) {
 
-        new Delete().from(ApartmentResponse.class).execute();
-
-        ActiveAndroid.beginTransaction();
-        try {
-            for (int i = 0; i < list.size(); i++) {
-                ApartmentResponse apartment = new ApartmentResponse();
-
-                apartment.setIdMember(list.get(i).getIdMember());
-                apartment.setAddress(list.get(i).getAddress());
-                apartment.setCapacity(list.get(i).getCapacity());
-                apartment.setCity(list.get(i).getCity());
-                apartment.setCover_photo(list.get(i).getCover_photo());
-                apartment.setDescription(list.get(i).getDescription());
-                apartment.setEmail(list.get(i).getEmail());
-                apartment.setLat(list.get(i).getLat());
-                apartment.setLng(list.get(i).getLng());
-                apartment.setName(list.get(i).getName());
-                apartment.setPhone(list.get(i).getPhone());
-                apartment.setPhone2(list.get(i).getPhone2());
-                apartment.setPrice(list.get(i).getPrice());
-                apartment.setRating(list.get(i).getRating());
-                apartment.setStars(list.get(i).getStars());
-                apartment.setType(list.get(i).getType());
-                apartment.setUserEmail(list.get(i).getUserEmail());
-                apartment.setUserNickname(list.get(i).getUserNickname());
-                apartment.setUserPhone(list.get(i).getUserPhone());
-                apartment.setDistanceTo(getString(R.string.unknown)); // if there is no internet, can't calculate distance
-
-                apartment.save();
-            }
-            ActiveAndroid.setTransactionSuccessful();
-
-        } finally {
-            ActiveAndroid.endTransaction();
-        }
-    }
 
     @Override
     public void onResume() {

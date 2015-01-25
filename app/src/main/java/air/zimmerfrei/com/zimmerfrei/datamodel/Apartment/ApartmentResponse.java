@@ -9,6 +9,8 @@ import com.google.gson.annotations.SerializedName;
 @Table(name = "ApartmentResponses")
 public class ApartmentResponse extends Model {
 
+    @Column(name = "apartment_id")
+    private String apartment_id;
     @Column(name = "idMember")
     @SerializedName(value = "id")
     @Expose
@@ -74,6 +76,15 @@ public class ApartmentResponse extends Model {
     @SerializedName("distance_to")
     @Expose
     private String distanceTo;
+
+
+    public String getApartment_id() {
+        return apartment_id;
+    }
+
+    public void setApartment_id(String apartment_id) {
+        this.apartment_id = apartment_id;
+    }
 
     /**
      *

@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -140,6 +141,7 @@ public class NearMeMapFragment extends Fragment implements GoogleMap.OnInfoWindo
                     Double.parseDouble(listApartment.get(i).getLat()),
                     Double.parseDouble(listApartment.get(i).getLng())))
                     .title(listApartment.get(i).getName())
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_green))
                     .snippet("Rating: " + listApartment.get(i).getRating()));
 
             MarkerInfo markerInfo = new MarkerInfo(listApartment.get(i).getIdMember(), listApartment.get(i).getName());

@@ -5,6 +5,8 @@ import android.app.ListFragment;
 import android.view.View;
 import android.widget.ListView;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import air.zimmerfrei.com.zimmerfrei.adapters.ApartmentListAdapter;
@@ -26,7 +28,13 @@ public abstract class ApartmentListFragment extends ListFragment{
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        int apartmentId = Integer.parseInt(listApartment.get(position).getIdMember());
+        int apartmentId;
+        if (listApartment.get(position).getApartment_id() == null) {
+            apartmentId = Integer.parseInt(listApartment.get(position).getIdMember());
+        } else {
+            apartmentId = Integer.parseInt(listApartment.get(position).getApartment_id());
+        }
+
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .setCustomAnimations(R.animator.enter_right, R.animator.exit_left, 0, R.animator.exit_right)
@@ -39,6 +47,14 @@ public abstract class ApartmentListFragment extends ListFragment{
      * If data request was successful, update display with data from response
      */
     protected void updateDisplay(int layoutID) {
+        if (listApartment.get(0).getDistanceTo() != null) {
+            Collections.sort(listApartment, new Comparator<ApartmentResponse>() {
+                @Override
+                public int compare(ApartmentResponse lhs, ApartmentResponse rhs) {
+                    return (int) (Float.parseFloat(lhs.getDistanceTo()) - Float.parseFloat(rhs.getDistanceTo()));
+                }
+            });
+        }
         ApartmentListAdapter adapter = new ApartmentListAdapter(getActivity(), layoutID, listApartment);
         setListAdapter(adapter);
     }

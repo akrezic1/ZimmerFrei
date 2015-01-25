@@ -18,6 +18,7 @@ import air.zimmerfrei.com.zimmerfrei.R;
 import air.zimmerfrei.com.zimmerfrei.datamodel.apartment.ApartmentResponse;
 
 /**
+ * Adapter used to fill ListViews with apartments
  * Created by Andro on 13.1.2015.
  */
 public class ApartmentListAdapter extends ArrayAdapter<ApartmentResponse> {
@@ -27,6 +28,7 @@ public class ApartmentListAdapter extends ArrayAdapter<ApartmentResponse> {
 
     public ApartmentListAdapter(Context context, int resource, List<ApartmentResponse> listApartment) {
         super(context, resource, listApartment);
+
         this.listApartment = listApartment;
         this.context = context;
     }
@@ -42,16 +44,21 @@ public class ApartmentListAdapter extends ArrayAdapter<ApartmentResponse> {
         ImageView image = (ImageView) view.findViewById(R.id.imageApartment);
         Picasso.with(context).load(apartment.getCover_photo()).into(image);
 
+        TextView address = (TextView) view.findViewById(R.id.distanceNearMe);
         if (apartment.getDistanceTo() != null) {
-            TextView address = (TextView) view.findViewById(R.id.distanceNearMe);
             address.setText(apartment.getDistanceTo() + " km");
+        } else {
+            address.setText("");
         }
 
         TextView price = (TextView) view.findViewById(R.id.list_price);
         price.setText(" " + apartment.getPrice() + "€");
 
         TextView nameAndAddress = (TextView) view.findViewById(R.id.list_name_address);
-        nameAndAddress.setText(apartment.getName() + ", " + apartment.getAddress());
+        nameAndAddress.setText(apartment.getAddress());
+
+        TextView apartmentName = (TextView) view.findViewById(R.id.apartment_name);
+        apartmentName.setText(apartment.getName());
 
         RatingBar rating = (RatingBar) view.findViewById(R.id.ratingNearMe);
         rating.setRating(Float.parseFloat(apartment.getRating()));
