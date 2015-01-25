@@ -38,6 +38,7 @@ import retrofit.client.Response;
 public class ApartmentDetailsFragment extends SwypeFragment implements CompoundButton.OnCheckedChangeListener {
 
     ApartmentDetailsResponse listResponse;
+    ToggleButton bookmark;
 
     /**
      * The fragment argument representing the section number for this
@@ -134,7 +135,7 @@ public class ApartmentDetailsFragment extends SwypeFragment implements CompoundB
         CirclePageIndicator indicator = (CirclePageIndicator) getView().findViewById(R.id.titles);
         indicator.setViewPager(pager);
 
-        ToggleButton bookmark = (ToggleButton) getView().findViewById(R.id.toggle_bookmark);
+        bookmark = (ToggleButton) getView().findViewById(R.id.toggle_bookmark);
         if (DBHelper.isApartmentSaved(listResponse.getResponse().get(0).getId()))
             bookmark.setChecked(true);
         else
@@ -160,12 +161,14 @@ public class ApartmentDetailsFragment extends SwypeFragment implements CompoundB
             public void success(ResponseStatus responseStatus, Response response) {
                 if (responseStatus.getStatus() == 200) {
                     Toast.makeText(getActivity(), R.string.saved_myplaces, Toast.LENGTH_SHORT).show();
+                    bookmark.setChecked(true);
                 }
             }
 
             @Override
             public void failure(RetrofitError error) {
                 Toast.makeText(getActivity(), R.string.connection_fail, Toast.LENGTH_SHORT).show();
+                bookmark.setChecked(false);
                 Log.d("BOOKMARK", error.getMessage());
             }
         });
@@ -190,14 +193,17 @@ public class ApartmentDetailsFragment extends SwypeFragment implements CompoundB
                         Log.d("REMOVE", response.getReason());
                         if (responseStatus.getStatus() == 200) {
                             Toast.makeText(getActivity(), R.string.removed_myplaces, Toast.LENGTH_SHORT).show();
+                            bookmark.setChecked(false);
                         } else {
                             Toast.makeText(getActivity(), R.string.unauthorized, Toast.LENGTH_SHORT).show();
+                            bookmark.setChecked(true);
                         }
                     }
 
                     @Override
                     public void failure(RetrofitError error) {
                         Log.d("REMOVE FAIL", error.getMessage());
+                        bookmark.setChecked(true);
                         Toast.makeText(getActivity(), R.string.connection_fail, Toast.LENGTH_SHORT).show();
                     }
                 }

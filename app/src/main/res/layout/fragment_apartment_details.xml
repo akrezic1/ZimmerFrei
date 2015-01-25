@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:background="#ffffff"
+    android:verticalScrollbarPosition="right"
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:id="@+id/apartment_details">
@@ -41,6 +42,7 @@
                 android:layout_gravity="end"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
                 android:checked="false"
                 android:textOff="@string/save_to_favorites"
                 android:textOn="@string/remove_bookmark" />

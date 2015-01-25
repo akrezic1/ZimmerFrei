@@ -41,8 +41,10 @@
         android:background="@drawable/button_blue"
         android:layout_below="@+id/password"
         android:layout_alignStart="@+id/password"
+        android:layout_alignLeft="@+id/password"
         android:layout_marginTop="38dp"
-        android:layout_alignEnd="@+id/password" />
+        android:layout_alignEnd="@+id/password"
+        android:layout_alignRight="@+id/password"/>
 
     <TextView
         android:id="@+id/textTitle"

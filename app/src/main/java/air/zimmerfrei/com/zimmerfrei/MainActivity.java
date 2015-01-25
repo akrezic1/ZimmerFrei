@@ -59,6 +59,8 @@ public class MainActivity extends Activity implements
         getCurrentLocation();
     }
 
+
+
     /**
      * Getting users current location on start of application
      */
@@ -170,8 +172,10 @@ public class MainActivity extends Activity implements
             case R.id.action_login:
                 Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
+                break;
             case R.id.action_sign_out:
                 SharedPrefsHelper.signOutAlert(this);
+                break;
         }
 
         return super.onOptionsItemSelected(item);
@@ -187,7 +191,7 @@ public class MainActivity extends Activity implements
     }
 
     @Override
-        public void onConnectionSuspended(int i) {
+    public void onConnectionSuspended(int i) {
 
     }
 

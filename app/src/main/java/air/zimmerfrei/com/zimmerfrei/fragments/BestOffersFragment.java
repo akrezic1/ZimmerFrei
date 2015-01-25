@@ -66,7 +66,7 @@ public class BestOffersFragment extends ApartmentListFragment {
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.connection_fail, Toast.LENGTH_SHORT).show();
                 Log.d("Retrofit log: ", error.getMessage());
             }
         });

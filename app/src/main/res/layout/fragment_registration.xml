@@ -52,7 +52,9 @@
         android:text="@string/create_account"
         android:layout_below="@+id/editEmail"
         android:layout_alignEnd="@+id/editEmail"
-        android:layout_alignStart="@+id/editEmail" />
+        android:layout_alignRight="@+id/editEmail"
+        android:layout_alignStart="@+id/editEmail"
+        android:layout_alignLeft="@+id/editEmail"/>
 
     <TextView
         android:id="@+id/textTitle"
