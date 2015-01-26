@@ -174,6 +174,7 @@ public class MainActivity extends Activity implements
                 startActivity(intent);
                 break;
             case R.id.action_sign_out:
+                invalidateOptionsMenu();
                 SharedPrefsHelper.signOutAlert(this);
                 break;
         }
@@ -211,5 +212,6 @@ public class MainActivity extends Activity implements
     @Override
     protected void onResume() {
         super.onResume();
+        invalidateOptionsMenu();
     }
 }

@@ -39,6 +39,10 @@ public class ApartmentDetailsFragment extends SwypeFragment implements CompoundB
 
     ApartmentDetailsResponse listResponse;
     ToggleButton bookmark;
+    TextView name, details, distance;
+    ViewPager pager;
+    RatingBar rating;
+    CirclePageIndicator indicator;
 
     /**
      * The fragment argument representing the section number for this
@@ -66,6 +70,14 @@ public class ApartmentDetailsFragment extends SwypeFragment implements CompoundB
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_apartment_details, container, false);
         getActivity().setTitle(R.string.title_apartment_details);
+
+        name = (TextView) rootView.findViewById(R.id.text_apartment_name);
+        details = (TextView) rootView.findViewById(R.id.text_apartment_details);
+        distance = (TextView) rootView.findViewById(R.id.apartmentDetailsDistance);
+        rating = (RatingBar) rootView.findViewById(R.id.rating_apartment);
+        pager = (ViewPager) rootView.findViewById(R.id.pager_apartment_details);
+        indicator = (CirclePageIndicator) rootView.findViewById(R.id.titles);
+        bookmark = (ToggleButton) rootView.findViewById(R.id.toggle_bookmark);
 
         setHasOptionsMenu(true);
         requestData();
@@ -103,19 +115,13 @@ public class ApartmentDetailsFragment extends SwypeFragment implements CompoundB
     }
 
     protected void updateDisplay() {
-        TextView name = (TextView) getView().findViewById(R.id.text_apartment_name);
-        name.setText(listResponse.getResponse().get(0).getName());
-
         getActivity().getActionBar().setTitle(listResponse.getResponse().get(0).getName());
 
-        RatingBar rating = (RatingBar) getView().findViewById(R.id.rating_apartment);
+        name.setText(listResponse.getResponse().get(0).getName());
         rating.setRating(Float.parseFloat(listResponse.getResponse().get(0).getRating()));
-
-        TextView details = (TextView) getView().findViewById(R.id.text_apartment_details);
         details.setText(listResponse.getResponse().get(0).getDescription());
 
         if (listResponse.getResponse().get(0).getDistanceTo() != null) {
-            TextView distance = (TextView) getView().findViewById(R.id.apartmentDetailsDistance);
             distance.setText(listResponse.getResponse().get(0).getDistanceTo() + "km " + getActivity().getString(R.string.distance));
         }
 
@@ -128,14 +134,11 @@ public class ApartmentDetailsFragment extends SwypeFragment implements CompoundB
                 pictures[i] = listResponse.getResponse().get(0).getPictures().get(i).getUrl();
             }
         }
-        ViewPager pager = (ViewPager) getView().findViewById(R.id.pager_apartment_details);
+
         ApartmentDetailsPager adapter = new ApartmentDetailsPager(getActivity(), pictures);
         pager.setAdapter(adapter);
-
-        CirclePageIndicator indicator = (CirclePageIndicator) getView().findViewById(R.id.titles);
         indicator.setViewPager(pager);
 
-        bookmark = (ToggleButton) getView().findViewById(R.id.toggle_bookmark);
         if (DBHelper.isApartmentSaved(listResponse.getResponse().get(0).getId()))
             bookmark.setChecked(true);
         else

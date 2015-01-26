@@ -4,6 +4,7 @@ import android.app.FragmentManager;
 import android.app.ListFragment;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -47,13 +48,15 @@ public abstract class ApartmentListFragment extends ListFragment{
      * If data request was successful, update display with data from response
      */
     protected void updateDisplay(int layoutID) {
-        if (listApartment.get(0).getDistanceTo() != null) {
+        if (listApartment.isEmpty() || listApartment.get(0).getDistanceTo() != null) {
             Collections.sort(listApartment, new Comparator<ApartmentResponse>() {
                 @Override
                 public int compare(ApartmentResponse lhs, ApartmentResponse rhs) {
                     return (int) (Float.parseFloat(lhs.getDistanceTo()) - Float.parseFloat(rhs.getDistanceTo()));
                 }
             });
+        } else {
+            //Toast.makeText(getActivity(), R.string.no_favorites, Toast.LENGTH_LONG).show();
         }
         ApartmentListAdapter adapter = new ApartmentListAdapter(getActivity(), layoutID, listApartment);
         setListAdapter(adapter);

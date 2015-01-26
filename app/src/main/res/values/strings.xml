@@ -29,6 +29,7 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="near_me">Near me</string>
     <string name="best_offers">Best offers</string>
+    <string name="splash_screen">Splash screen</string>
 
     <!-- register & login -->
     <string name="username">Username</string>
@@ -64,5 +65,6 @@
     <string name="could_not_connect">Can\'t connect to GPS</string>
     <string name="location_error">GPS location not found</string>
     <string name="unauthorized">Unauthorized</string>
+    <string name="no_favorites">No apartments favored</string>
 
 </resources>
