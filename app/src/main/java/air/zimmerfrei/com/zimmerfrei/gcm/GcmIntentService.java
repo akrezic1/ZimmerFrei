@@ -7,10 +7,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import air.zimmerfrei.com.zimmerfrei.MainActivity;
 import air.zimmerfrei.com.zimmerfrei.R;
@@ -45,10 +49,18 @@ public class GcmIntentService extends IntentService {
                         extras.toString(),"Error");
             } else if (GoogleCloudMessaging.
                     MESSAGE_TYPE_MESSAGE.equals(messageType)) {
-                Log.i("TAG", "Completed work @ " + SystemClock.elapsedRealtime());
+                Log.d("NOTIFICATION", extras.toString());
+                try {
+                    JSONObject jsonObject = new JSONObject(extras.getString("message"));
 
-                sendNotification("Received: " + extras.toString(), "ZimmerFrei");
-                Log.i(TAG, "Received: " + extras.toString());
+                    String message, title;
+                    title = jsonObject.getString("title");
+                    message = jsonObject.getString("message");
+
+                    sendNotification(message, title);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }
         GcmBroadcastReceiver.completeWakefulIntent(intent);
@@ -66,7 +78,8 @@ public class GcmIntentService extends IntentService {
                         .setSmallIcon(R.drawable.ic_launcher)
                         .setContentTitle(title)
                         .setStyle(new NotificationCompat.BigTextStyle()
-                                .bigText(msg))
+                        .bigText(title))
+                        .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
                         .setContentText(msg);
 
         mBuilder.setContentIntent(contentIntent);
