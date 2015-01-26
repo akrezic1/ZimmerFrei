@@ -11,6 +11,7 @@ import android.webkit.WebView;
 import air.zimmerfrei.com.zimmerfrei.R;
 
 /**
+ * Fragment shows help information for using this application
  * Created by Andro on 29.10.2014..
  */
 public class HelpFragment extends Fragment {

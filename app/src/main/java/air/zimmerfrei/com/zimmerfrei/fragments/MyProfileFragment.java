@@ -19,6 +19,7 @@ import air.zimmerfrei.com.zimmerfrei.SharedPrefsHelper;
 import air.zimmerfrei.com.zimmerfrei.adapters.CircleTransform;
 
 /**
+ * Fragment with users profile data
  * Created by Andro on 29.10.2014..
  */
 public class MyProfileFragment extends Fragment implements View.OnClickListener {
@@ -55,6 +56,10 @@ public class MyProfileFragment extends Fragment implements View.OnClickListener 
         return view;
     }
 
+    /**
+     * Update display with obtained data
+     * @param view active view with layout
+     */
     protected void updateDisplay(View view) {
         getUserData();
 
@@ -77,6 +82,9 @@ public class MyProfileFragment extends Fragment implements View.OnClickListener 
         btnLogout.setOnClickListener(this);
     }
 
+    /**
+     * Get users data from SharedPreferences
+     */
     protected void getUserData() {
         SharedPreferences sp = getActivity().getSharedPreferences("air.zimmerfrei.com.zimmerfrei", Context.MODE_PRIVATE);
 
@@ -93,8 +101,6 @@ public class MyProfileFragment extends Fragment implements View.OnClickListener 
         SharedPrefsHelper.signOutAlert(getActivity());
         openHome();
     }
-
-
 
     private void openHome() {
         FragmentManager fragmentManager = getFragmentManager();

@@ -20,6 +20,7 @@ import air.zimmerfrei.com.zimmerfrei.MainActivity;
 import air.zimmerfrei.com.zimmerfrei.R;
 
 /**
+ * Class used for handling and parsing push notifications
  * Created by Andro on 22.1.2015.
  */
 public class GcmIntentService extends IntentService {

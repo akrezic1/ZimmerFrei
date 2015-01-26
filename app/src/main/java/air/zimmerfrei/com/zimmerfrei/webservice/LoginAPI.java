@@ -9,6 +9,7 @@ import retrofit.http.GET;
 import retrofit.http.POST;
 
 /**
+ * Interface with methods that registered users can use, or to register new account
  * Created by Andro on 21.12.2014.
  */
 public interface LoginAPI {
@@ -38,6 +39,15 @@ public interface LoginAPI {
         Callback<LaravelSessionToken> session_token
     );
 
+    /**
+     * Register new user
+     * @param token Laravel session token that is needed to communicate with web service
+     * @param email users email
+     * @param username users username
+     * @param password users password
+     * @param gcm Google Cloud Messaging ID that is used for push notifications
+     * @param callback response from server
+     */
     @FormUrlEncoded
     @POST("/api/v1/signup")
     public void register(

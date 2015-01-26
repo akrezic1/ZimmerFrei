@@ -21,6 +21,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
+ * Fragment containing registration form
  * Created by Andro on 23.12.2014.
  */
 public class RegistrationFragment extends SwypeFragment implements View.OnClickListener {
@@ -57,6 +58,10 @@ public class RegistrationFragment extends SwypeFragment implements View.OnClickL
         return rootView;
     }
 
+    /**
+     * Returns RestAdapter that is needed to call web service
+     * @return LoginAPI RestAdapter
+     */
     private LoginAPI getRestAdapter() {
         RestAdapter adapter = new RestAdapter.Builder()
                 .setEndpoint(getResources().getString(R.string.ENDPOINT))

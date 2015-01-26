@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.support.v4.content.WakefulBroadcastReceiver;
 
 /**
+ * Broadcast receiver that waits for notification
  * Created by Andro on 22.1.2015.
  */
 public class GcmBroadcastReceiver extends WakefulBroadcastReceiver {

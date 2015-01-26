@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import com.squareup.picasso.Picasso;
 
 /**
+ * Pager used to swype images in apartment details
  * Created by Andro on 23.12.2014.
  */
 public class ApartmentDetailsPager extends PagerAdapter {

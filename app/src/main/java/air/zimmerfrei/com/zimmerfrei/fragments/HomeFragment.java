@@ -11,6 +11,7 @@ import android.widget.Button;
 import air.zimmerfrei.com.zimmerfrei.R;
 
 /**
+ * Main fragment that displays after splash screen
  * Created by Andro on 27.11.2014..
  */
 public class HomeFragment extends Fragment implements View.OnClickListener {

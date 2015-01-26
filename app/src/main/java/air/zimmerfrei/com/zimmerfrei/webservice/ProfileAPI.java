@@ -13,6 +13,13 @@ import retrofit.http.POST;
  */
 public interface ProfileAPI {
 
+    /**
+     * Save apartment to MyPlaces
+     * @param token session token
+     * @param username users username
+     * @param id apartments ID
+     * @param response response from server
+     */
     @FormUrlEncoded
     @POST("/api/v1/setUserFavorites")
     public void setUserFavorite(
@@ -22,6 +29,13 @@ public interface ProfileAPI {
             Callback<ResponseStatus> response
     );
 
+    /**
+     * Remove apartment from MyPlaces
+     * @param token session token
+     * @param username users username
+     * @param id apartments ID
+     * @param response response from server
+     */
     @FormUrlEncoded
     @POST("/api/v1/deleteUserFavorites")
     public void deleteUserFavorite(
@@ -31,6 +45,12 @@ public interface ProfileAPI {
             Callback<ResponseStatus> response
     );
 
+    /**
+     * Get list with users favourite apartments
+     * @param token session token
+     * @param username users username
+     * @param apartment response from server
+     */
     @FormUrlEncoded
     @POST("/api/v1/getUserFavorites")
     public void getUserFavorites(

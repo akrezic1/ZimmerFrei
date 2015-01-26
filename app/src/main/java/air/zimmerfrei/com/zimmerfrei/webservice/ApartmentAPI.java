@@ -7,6 +7,7 @@ import retrofit.http.GET;
 import retrofit.http.Query;
 
 /**
+ * Interface with methods used to get apartments from web services using Retrofit
  * Created by Andro on 29.11.2014..
  */
 public interface ApartmentAPI {
@@ -37,6 +38,12 @@ public interface ApartmentAPI {
             @Query("lng") String lng,
             Callback<ApartmentDetailsResponse> response);
 
+    /**
+     * Retrofit method used to get apartments best offers
+     * @param lat is latitude as in geographic coordinate
+     * @param lng is longitude as in geographic coordinate
+     * @param apartment is response from server
+     */
     @GET("/api/v1/apartmentSpecialOffers")
     public void getBestOffers(
             @Query("lat") String lat,

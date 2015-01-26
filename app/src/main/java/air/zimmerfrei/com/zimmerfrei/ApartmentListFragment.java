@@ -15,7 +15,10 @@ import air.zimmerfrei.com.zimmerfrei.datamodel.apartment.ApartmentResponse;
 import air.zimmerfrei.com.zimmerfrei.fragments.ApartmentDetailsFragment;
 
 /**
- * Abstract class implementation for fragments that use lists with apartments
+ * Abstract class implementation for fragments that use lists with apartments, it's only required
+ * to populate listApartment list with apartments and call updateDisplay(int LayoutID) method
+ * with ID from layout that displays list
+ * layout
  * Created by Andro on 13.1.2015.
  */
 public abstract class ApartmentListFragment extends ListFragment{

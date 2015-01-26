@@ -11,6 +11,7 @@ import android.widget.Button;
 import air.zimmerfrei.com.zimmerfrei.R;
 
 /**
+ * Fragment with two choices - register or login
  * Created by Andro on 23.12.2014.
  */
 public class LoginOrRegisterFragment extends Fragment implements View.OnClickListener{
@@ -44,6 +45,10 @@ public class LoginOrRegisterFragment extends Fragment implements View.OnClickLis
         return rootView;
     }
 
+    /**
+     * Initialize variabled on opening this fragment
+     * @param view active view with layout
+     */
     private void init(View view) {
         Button btnCreateAcc = (Button) view.findViewById(R.id.btn_create_acc);
         Button btnLogin = (Button) view.findViewById(R.id.btn_login);

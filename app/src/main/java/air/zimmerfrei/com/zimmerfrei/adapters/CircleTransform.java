@@ -7,6 +7,9 @@ import android.graphics.Paint;
 
 import com.squareup.picasso.Transformation;
 
+/**
+ * Class that cuts edges from images, making them look like circle
+ */
 public class CircleTransform implements Transformation {
     @Override
     public Bitmap transform(Bitmap source) {

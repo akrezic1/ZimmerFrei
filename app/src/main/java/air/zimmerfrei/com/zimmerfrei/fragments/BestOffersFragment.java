@@ -20,6 +20,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
+ * Fragment displays apartment list with best offers
  * Created by Andro on 12.1.2015.
  */
 public class BestOffersFragment extends ApartmentListFragment {
@@ -45,6 +46,9 @@ public class BestOffersFragment extends ApartmentListFragment {
         return rootView;
     }
 
+    /**
+     * Request data from web service with best apartment offers
+     */
     private void requestData() {
         listApartment = new ArrayList<>();
 

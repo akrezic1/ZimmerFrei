@@ -30,6 +30,10 @@ public class SharedPrefsHelper {
         sp.edit().putString("email", profile.getResponse().getEmail()).apply();
     }
 
+    /**
+     * Popup alert that asks user if he really want to sign out
+     * @param context application context
+     */
     public static void signOutAlert(final Context context) {
         new AlertDialog.Builder(context)
                 .setTitle(R.string.logout)

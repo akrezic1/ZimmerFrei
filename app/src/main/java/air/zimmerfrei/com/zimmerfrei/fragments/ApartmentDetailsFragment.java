@@ -33,6 +33,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
+ * Fragment that is used to display details for apartment
  * Created by Andro on 10.11.2014..
  */
 public class ApartmentDetailsFragment extends SwypeFragment implements CompoundButton.OnCheckedChangeListener {
@@ -114,6 +115,9 @@ public class ApartmentDetailsFragment extends SwypeFragment implements CompoundB
         });
     }
 
+    /**
+     * Update display with obtained data
+     */
     protected void updateDisplay() {
         getActivity().getActionBar().setTitle(listResponse.getResponse().get(0).getName());
 

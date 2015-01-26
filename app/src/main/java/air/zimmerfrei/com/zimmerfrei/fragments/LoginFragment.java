@@ -23,6 +23,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
+ * Fragment used to login user
  * Created by Andro on 22.12.2014.
  */
 public class LoginFragment extends SwypeFragment implements View.OnClickListener {
@@ -84,6 +85,9 @@ public class LoginFragment extends SwypeFragment implements View.OnClickListener
         }
     }
 
+    /**
+     * Get laravel token that is needed to communicate with web service
+     */
     private void getLaravelToken() {
         RestAdapter adapter = new RestAdapter.Builder()
                 .setEndpoint(getResources().getString(R.string.ENDPOINT))

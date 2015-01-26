@@ -29,8 +29,8 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-
 /**
+ * Fragment that displays apartments that user saved/bookmarked
  * Created by Andro on 29.10.2014.
  */
 public class MyPlacesFragment extends ApartmentListFragment {
@@ -67,6 +67,10 @@ public class MyPlacesFragment extends ApartmentListFragment {
         return rootView;
     }
 
+    /**
+     * Check if connection to internet is available
+     * @return
+     */
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
