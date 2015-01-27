@@ -60,7 +60,6 @@ public class MainActivity extends Activity implements
     }
 
 
-
     /**
      * Getting users current location on start of application
      */
@@ -77,6 +76,7 @@ public class MainActivity extends Activity implements
 
     /**
      * Switch between fragments on navigation drawer click
+     *
      * @param position represents navigation drawer item position
      */
     @Override
@@ -128,10 +128,11 @@ public class MainActivity extends Activity implements
 
     /**
      * Switch fragment and choose if you want to put it on backstack
-     * @param fragment fragment that is going to be added
+     *
+     * @param fragment  fragment that is going to be added
      * @param backstack boolean value - true if you want to put it on backstack
      */
-    private void switchFragment (Fragment fragment, boolean backstack) {
+    private void switchFragment(Fragment fragment, boolean backstack) {
         FragmentManager fragmentManager = getFragmentManager();
         if (backstack) {
             fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE); // clear previous fragments from backstack
@@ -176,6 +177,12 @@ public class MainActivity extends Activity implements
             case R.id.action_sign_out:
                 invalidateOptionsMenu();
                 SharedPrefsHelper.signOutAlert(this);
+                break;
+
+            case R.id.action_settings:
+                Intent settingsIntent = new Intent(this, SettingsActivity.class);
+                startActivity(settingsIntent);
+                finish();
                 break;
         }
 

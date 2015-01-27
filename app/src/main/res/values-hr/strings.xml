@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="ENDPOINT">http://188.226.150.65</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="apartment_pic">Apartment cover_photo</string>
+    <string name="look_here">Pogledaj ovdje ?</string>
+    <string name="are_you_sure_map">Sigurno želite pogledati ovdje ?</string>
+    <string name="background_image">Background image</string>
+    <string name="distance">Udaljenost</string>
+    <string name="unknown">nepoznato</string>
+
+    <!-- menu actions -->
+    <string name="action_settings">Postavke</string>
+    <string name="action_bookmark">Oznaka</string>
+
+    <!-- fragment names -->
+    <string name="app_name">ZimmerFrei</string>
+    <string name="title_home">Početna</string>
+    <string name="title_section_map">Istraži</string>
+    <string name="title_section_list">Oko mene</string>
+    <string name="title_section_my_places">Moja mjesta</string>
+    <string name="title_section_profile">Profil</string>
+    <string name="title_section_help">Pomoć</string>
+    <string name="title_section_about">O nama</string>
+    <string name="title_apartment_details">Apartment details</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_settings">Postavke</string>
+    <string name="near_me">Oko mene</string>
+    <string name="best_offers">Najbolje ponude</string>
+    <string name="splash_screen">Splash screen</string>
+    <string name="save_settings">Sačuvaj postavke</string>
+
+    <!-- register & login -->
+    <string name="username">Korisničko ime</string>
+    <string name="password">Lozinku</string>
+    <string name="no_user_pass">Unesite korisničko ime i lozinku</string>
+    <string name="wrong_user_pass">Kriva lozinka ili korisničko ime</string>
+    <string name="register">Registracija</string>
+    <string name="login_or_register">Molimo registrirajte se ili prijavite</string>
+    <string name="registration_problem">PGreška pri registraciji, molimo pokušajte opet</string>
+    <string name="logout">Odjava</string>
+    <string name="login">Prijava</string>
+    <string name="create_account">Kreiraj račun</string>
+    <string name="registration">Registriraj račun</string>
+    <string name="login_with_account">Prijava</string>
+    <string name="name">Ime</string>
+    <string name="surname">Prezime</string>
+    <string name="email">E-mail</string>
+    <string name="phone">Telefon</string>
+    <string name="lbl_language_type">Odabir jezika</string>
+
+    <!-- profile -->
+    <string name="user_profile_image">Korisnička slika</string>
+    <string name="are_you_sure_logout">Sigurni ste da se želite odjaviti ?</string>
+    <string name="save_to_favorites">Sačuvaj</string>
+    <string name="remove_bookmark">Ukloni</string>
+    <string name="user_type">Putnik</string>
+    <string name="sign_out">Odjava</string>
+    <string name="saved_myplaces">Saved to MyPlaces</string>
+    <string name="removed_myplaces">Removed from MyPlaces</string>
+
+    <!-- errors -->
+    <string name="connection_fail">Pukla veza</string>
+    <string name="no_play_services">Google play usluge nisu omogućene</string>
+    <string name="could_not_connect">Ne mogu se spojiti na GPS</string>
+    <string name="location_error">GPS lokacija nije pronađena</string>
+    <string name="unauthorized">Neautorizirani korisnik</string>
+    <string name="unauthorized_please">Neautorizirani korisnik, molimo prijavite se</string>
+    <string name="no_favorites">Nemate označenih apartmana</string>
+
+</resources>

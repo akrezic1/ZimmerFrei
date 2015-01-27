@@ -18,8 +18,8 @@
 
     <!-- fragment names -->
     <string name="app_name">ZimmerFrei</string>
-    <string name="title_home">Home</string>
-    <string name="title_section_map">Near me (map)</string>
+    <string name="title_home">Kući</string>
+    <string name="title_section_map">Blizu (map)</string>
     <string name="title_section_list">Near me (list)</string>
     <string name="title_section_my_places">My places</string>
     <string name="title_section_profile">Profile</string>
@@ -42,14 +42,14 @@
     <string name="login_or_register">Please login or register</string>
     <string name="registration_problem">Registration error, please try again</string>
     <string name="logout">Log out</string>
-    <string name="login">Sign in</string>
-    <string name="create_account">Create account</string>
+    <string name="login">Entrar</string>
+    <string name="create_account">Crear una cuenta</string>
     <string name="registration">Register an account</string>
     <string name="login_with_account">Sign in</string>
-    <string name="name">Name</string>
+    <string name="name">Nome</string>
     <string name="surname">Surname</string>
     <string name="email">E-mail</string>
-    <string name="phone">Phone</string>
+    <string name="phone">Teléfono</string>
     <string name="lbl_language_type">Select language</string>
 
     <!-- profile -->
@@ -63,7 +63,7 @@
     <string name="removed_myplaces">Removed from MyPlaces</string>
 
     <!-- errors -->
-    <string name="connection_fail">Connection failed</string>
+    <string name="connection_fail"> Error de conexión</string>
     <string name="no_play_services">No play services available</string>
     <string name="could_not_connect">Can\'t connect to GPS</string>
     <string name="location_error">GPS location not found</string>

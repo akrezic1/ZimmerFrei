@@ -109,4 +109,14 @@ public class SharedPrefsHelper {
         return prefs.getString("email", "error");
     }
 
+    public static void saveLanguageToSharedPref(String lang, Context context) {
+        SharedPreferences sp = context.getSharedPreferences("air.zimmerfrei.com.zimmerfrei", Context.MODE_PRIVATE);
+        sp.edit().putString("language",lang ).apply();
+    }
+
+    public static String getAppLanguage(Context context){
+        SharedPreferences prefs = context.getSharedPreferences("air.zimmerfrei.com.zimmerfrei", Context.MODE_PRIVATE);
+        return prefs.getString("language", "error");
+    }
+
 }
