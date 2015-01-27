@@ -1,12 +1,14 @@
 package air.zimmerfrei.com.zimmerfrei.fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
@@ -36,7 +38,8 @@ import retrofit.client.Response;
  * Fragment that is used to display details for apartment
  * Created by Andro on 10.11.2014..
  */
-public class ApartmentDetailsFragment extends SwypeFragment implements CompoundButton.OnCheckedChangeListener {
+public class ApartmentDetailsFragment extends SwypeFragment implements
+        CompoundButton.OnCheckedChangeListener, View.OnTouchListener {
 
     ApartmentDetailsResponse listResponse;
     ToggleButton bookmark;
@@ -44,6 +47,7 @@ public class ApartmentDetailsFragment extends SwypeFragment implements CompoundB
     ViewPager pager;
     RatingBar rating;
     CirclePageIndicator indicator;
+    ApartmentDetailsPager adapter;
 
     /**
      * The fragment argument representing the section number for this
@@ -139,8 +143,9 @@ public class ApartmentDetailsFragment extends SwypeFragment implements CompoundB
             }
         }
 
-        ApartmentDetailsPager adapter = new ApartmentDetailsPager(getActivity(), pictures);
+        adapter = new ApartmentDetailsPager(getActivity(), pictures);
         pager.setAdapter(adapter);
+        pager.setOnTouchListener(this); // If user touches ViewPager, remove auto scroll
         indicator.setViewPager(pager);
 
         if (DBHelper.isApartmentSaved(listResponse.getResponse().get(0).getId()))
@@ -148,7 +153,34 @@ public class ApartmentDetailsFragment extends SwypeFragment implements CompoundB
         else
             bookmark.setChecked(false);
         bookmark.setOnCheckedChangeListener(this);
+
+        runnable.run(); // Run auto scroll of images inside ViewPager
     }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        super.onTouch(v, event);
+        if (handler!= null) {
+            handler.removeCallbacks(runnable); // Disable auto scroll
+            pager.setOnTouchListener(null);
+        }
+        return true;
+    }
+
+
+    private int position = 0;
+    private Handler handler = new Handler();
+    private Runnable runnable = new Runnable() {
+        public void run() {
+            if( position >= adapter.getCount() - 1){
+                position = 0;
+            }else{
+                position++;
+            }
+            pager.setCurrentItem(position, true);
+            handler.postDelayed(runnable, 4000);
+        }
+    };
 
     /**
      * Method used to add apartment to bookmarks/MyPlaces
@@ -224,5 +256,19 @@ public class ApartmentDetailsFragment extends SwypeFragment implements CompoundB
         } else {
             removeBookmark();
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (handler!= null) {
+            handler.removeCallbacks(runnable);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        handler.postDelayed(runnable, 10000);
     }
 }
