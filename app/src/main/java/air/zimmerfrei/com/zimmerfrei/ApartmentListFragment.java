@@ -4,7 +4,6 @@ import android.app.FragmentManager;
 import android.app.ListFragment;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.Collections;
 import java.util.Comparator;

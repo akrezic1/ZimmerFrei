@@ -5,9 +5,6 @@ import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -167,7 +164,6 @@ public class ApartmentDetailsFragment extends SwypeFragment implements
         return true;
     }
 
-
     private int position = 0;
     private Handler handler = new Handler();
     private Runnable runnable = new Runnable() {
@@ -186,18 +182,12 @@ public class ApartmentDetailsFragment extends SwypeFragment implements
      * Method used to add apartment to bookmarks/MyPlaces
      */
     private void bookmarkApartment() {
-
-
-        String DBG = "DBG";
         String authToken = SharedPrefsHelper.getAuthToken(getActivity());
-        Log.d(DBG, "auth token" + authToken);
 
         //If this is true then user is not logged in
         if (authToken.equals("error") || authToken.isEmpty()) {
-            Log.d(DBG, "TAG1" + "NEBI trebao biti logiran" + authToken);
             Toast.makeText(getActivity(), R.string.unauthorized_please, Toast.LENGTH_SHORT).show();
             bookmark.setChecked(false);
-            return;
         }
         else{
             bookmark.setChecked(true);
@@ -227,12 +217,6 @@ public class ApartmentDetailsFragment extends SwypeFragment implements
                         }
                     });
         }
-
-
-
-
-
-
 
     }
 
@@ -292,6 +276,6 @@ public class ApartmentDetailsFragment extends SwypeFragment implements
     @Override
     public void onResume() {
         super.onResume();
-        handler.postDelayed(runnable, 10000);
+        handler.postDelayed(runnable, 4000);
     }
 }
