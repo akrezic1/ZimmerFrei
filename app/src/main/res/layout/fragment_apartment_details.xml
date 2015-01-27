@@ -40,21 +40,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:checked="false"
+                android:background="@drawable/button_blue"
+                android:textColor="#EEE"
+                android:ems="2"
                 android:textOff="@string/save_to_favorites"
-                android:textOn="@string/remove_bookmark" />
-
-
+                android:textOn="@string/remove_bookmark"
+                android:layout_toEndOf="@+id/rating_apartment"
+                android:layout_alignParentTop="true" />
         </RelativeLayout>
 
         <TextView
             android:id="@+id/text_apartment_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
+            android:textSize="32sp"
             android:text="Apartment" />
 
         <TextView
@@ -67,7 +69,10 @@
         <TextView
             android:id="@+id/text_apartment_details"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:textSize="18sp"
+            />
 
     </LinearLayout>
 
