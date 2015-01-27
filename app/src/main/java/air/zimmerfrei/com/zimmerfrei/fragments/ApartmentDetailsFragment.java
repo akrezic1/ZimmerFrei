@@ -272,10 +272,4 @@ public class ApartmentDetailsFragment extends SwypeFragment implements
             handler.removeCallbacks(runnable);
         }
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        handler.postDelayed(runnable, 4000);
-    }
 }

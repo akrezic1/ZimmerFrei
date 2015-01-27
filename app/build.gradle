@@ -26,7 +26,7 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile "com.android.support:appcompat-v7:21.0.3"
+    compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'com.google.android.gms:play-services:6.5.87'
     compile 'com.squareup.okhttp:okhttp:2.2.0'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
@@ -35,4 +35,5 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.4.0'
     compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
     compile 'com.viewpagerindicator:library:2.4.1@aar'
+    compile 'com.android.support:support-v4:21.0.3'
 }
