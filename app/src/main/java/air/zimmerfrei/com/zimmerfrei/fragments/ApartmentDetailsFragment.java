@@ -154,31 +154,54 @@ public class ApartmentDetailsFragment extends SwypeFragment implements CompoundB
      * Method used to add apartment to bookmarks/MyPlaces
      */
     private void bookmarkApartment() {
-        RestAdapter adapter = new RestAdapter.Builder()
-                .setEndpoint(getResources().getString(R.string.ENDPOINT))
-                .build();
 
-        ProfileAPI api = adapter.create(ProfileAPI.class);
-        api.setUserFavorite(
-                SharedPrefsHelper.getAuthToken(getActivity()),
-                SharedPrefsHelper.getUsername(getActivity()),
-                Integer.parseInt(listResponse.getResponse().get(0).getId()),
-                new Callback<ResponseStatus>() {
-            @Override
-            public void success(ResponseStatus responseStatus, Response response) {
-                if (responseStatus.getStatus() == 200) {
-                    Toast.makeText(getActivity(), R.string.saved_myplaces, Toast.LENGTH_SHORT).show();
-                    bookmark.setChecked(true);
-                }
-            }
 
-            @Override
-            public void failure(RetrofitError error) {
-                Toast.makeText(getActivity(), R.string.connection_fail, Toast.LENGTH_SHORT).show();
-                bookmark.setChecked(false);
-                Log.d("BOOKMARK", error.getMessage());
-            }
-        });
+        String DBG = "DBG";
+        String authToken = SharedPrefsHelper.getAuthToken(getActivity());
+        Log.d(DBG, "auth token" + authToken);
+
+        //If this is true then user is not logged in
+        if (authToken.equals("error") || authToken.isEmpty()) {
+            Log.d(DBG, "TAG1" + "NEBI trebao biti logiran" + authToken);
+            Toast.makeText(getActivity(), R.string.unauthorized_please, Toast.LENGTH_SHORT).show();
+            bookmark.setChecked(false);
+            return;
+        }
+        else{
+            bookmark.setChecked(true);
+            RestAdapter adapter = new RestAdapter.Builder()
+                    .setEndpoint(getResources().getString(R.string.ENDPOINT))
+                    .build();
+
+            ProfileAPI api = adapter.create(ProfileAPI.class);
+            api.setUserFavorite(
+                    SharedPrefsHelper.getAuthToken(getActivity()),
+                    SharedPrefsHelper.getUsername(getActivity()),
+                    Integer.parseInt(listResponse.getResponse().get(0).getId()),
+                    new Callback<ResponseStatus>() {
+                        @Override
+                        public void success(ResponseStatus responseStatus, Response response) {
+                            if (responseStatus.getStatus() == 200) {
+                                Toast.makeText(getActivity(), R.string.saved_myplaces, Toast.LENGTH_SHORT).show();
+                                bookmark.setChecked(true);
+                            }
+                        }
+
+                        @Override
+                        public void failure(RetrofitError error) {
+                            Toast.makeText(getActivity(), R.string.connection_fail, Toast.LENGTH_SHORT).show();
+                            bookmark.setChecked(false);
+                            Log.d("BOOKMARK", error.getMessage());
+                        }
+                    });
+        }
+
+
+
+
+
+
+
     }
 
     /**

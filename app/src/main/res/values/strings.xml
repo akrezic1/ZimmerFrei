@@ -65,6 +65,7 @@
     <string name="could_not_connect">Can\'t connect to GPS</string>
     <string name="location_error">GPS location not found</string>
     <string name="unauthorized">Unauthorized</string>
+    <string name="unauthorized_please">Unauthorized ! Please log in</string>
     <string name="no_favorites">No apartments favored</string>
 
 </resources>
